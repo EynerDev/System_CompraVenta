@@ -2,7 +2,7 @@
 
     class empresa extends conectar{
         // TODO: Listar registros por sucursal id
-        public function get_empresa_sucursal_id($com_id){
+        public function get_empresa_compania_id($com_id){
             $conectar = parent::conexion();
             $sql = "SP_L_EMPRESA_01 ?";
             $sql_query=$conectar->prepare($sql);

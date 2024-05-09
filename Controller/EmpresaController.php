@@ -18,7 +18,7 @@
             // TODO: Listado de registros formato JSON para datatable JS
         case "listar":
 
-            $datos = $empresa->get_empresa_id($_POST["com_id"]);
+            $datos = $empresa->get_empresa_compania_id($_POST["com_id"]);
             $data  = array();
             foreach($datos as $row){
                 $sub_array = array();
@@ -58,9 +58,18 @@
             $empresa->delete_empresa($_POST["emp_id"]);
             break;
 
-    }
+        case "combo":
+            $datos = $empresa->get_empresa_compania_id($_POST["com_id"]);
+            if(is_array($datos)==TRUE and count($datos)>0){
+                $html="";
+                $html.="<option>Seleccionar Empresa</option>";
+                foreach($datos as $row){
+                    $html.="<option value='".$row["EMP_ID"]."'>".$row["EMP_NAME"]."</option>";
+                }
+                echo $html;
+            }
 
 
 
-
+        }
 ?>
