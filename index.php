@@ -1,15 +1,26 @@
+<?php
+require_once("Config/conn.php");
+if(isset($_POST["enviar"]) and $_POST["enviar"]=="si"){
+require_once("Models/UsuarioModel.php");
+$usuario = new Usuario;
+$usuario->Login();
+}
+
+?>
+
 <!doctype html>
 <html lang="en" data-layout="vertical" data-topbar="light" data-sidebar="dark" data-sidebar-size="lg" data-sidebar-image="none">
 
 <head>
 
     <meta charset="utf-8" />
-    <title>Sign In | Velzon - Admin & Dashboard Template</title>
+    <title>Login EynerDev System</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
     <meta content="Themesbrand" name="author" />
     <!-- App favicon -->
     <link rel="shortcut icon" href="assets/images/favicon.ico">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
     <!-- Layout config Js -->
     <script src="assets/js/layout.js"></script>
@@ -44,7 +55,6 @@
                                         <div class="position-relative h-100 d-flex flex-column">
                                             <div class="mb-4">
                                                 <a href="index.html" class="d-block">
-                                                    <img src="assets/images/logo-light.png" alt="" height="18">
                                                 </a>
                                             </div>
                                             <div class="mt-auto">
@@ -85,25 +95,28 @@
                                         </div>
 
                                         <div class="mt-4">
-                                            <form action="index.html">
+                                            <form action="" method="post" id="login_form">
 
-                                                <div class="mb-3">
-                                                    <label for="emp_id" class="form-label">Empresa:</label>
-                                                    <select class="from_control form-select" id="emp_id" name="emp_id">
-                                                        <option selected>Seleccionar Empresa</option>
+                                                <div class="col-lg-4">
+                                                    <h6 class="fw-semibold">Empresa:</h6>
+                                                    <select class="js-example-basic-single" id="emp_id" name="emp_id">
+                                                    <option selected>Seleccionar Empresa</option>
+                                                        
                                                     </select>
                                                 </div>
-                                                <div class="mb-3">
-                                                    <label for="suc_id" class="form-label">Sucursal:</label>
-                                                    <select class="from_control form-select" id="suc_id" name="sucursasuc_idl">
-                                                        <option selected>Seleccionar Sucursal</option>
+                                                
+                                                <div class="col-lg-4">
+                                                    <h6 class="fw-semibold">Sucursal:</h6>
+                                                    <select class="js-example-basic-single" id="suc_id" name="suc_id">
+                                                    <option selected>Seleccionar Sucursal</option>
+                                                        
                                                     </select>
                                                 </div>
                                             
 
                                                 <div class="mb-3">
-                                                    <label for="correo" class="form-label">Correo:</label>
-                                                    <input type="text" class="form-control" id="correo" placeholder="Ingrese su Correo">
+                                                    <label for="" class="form-label">Correo:</label>
+                                                    <input type="text" class="form-control" name="email" id="email" placeholder="Ingrese su Correo">
                                                 </div>
 
                                                 <div class="mb-3">
@@ -112,7 +125,7 @@
                                                     </div>
                                                     <label class="form-label" for="contraseña">Contraseña:</label>
                                                     <div class="position-relative auth-pass-inputgroup mb-3">
-                                                        <input type="password" class="form-control pe-5" placeholder="Ingrese su Contraseña" id="contraseña">
+                                                        <input type="password" class="form-control pe-5" placeholder="Ingrese su Contraseña" name="password" id="password">
                                                         <button class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted" type="button" id="password-addon"><i class="ri-eye-fill align-middle"></i></button>
                                                     </div>
                                                 </div>
@@ -123,7 +136,8 @@
                                                 </div>
 
                                                 <div class="mt-4">
-                                                    <button class="btn btn-success w-100" type="submit">Acceder</button>
+                                                    <input type="hidden" name="enviar" value="si" class="form_control">
+                                                    <button class="btn btn-success w-100"  type="submit">Acceder</button>
                                                 </div>
 
                                                 
@@ -169,6 +183,11 @@
     <script src="assets/libs/feather-icons/feather.min.js"></script>
     <script src="assets/js/pages/plugins/lord-icon-2.1.0.js"></script>
     <script src="assets/js/plugins.js"></script>
+
+    <!--jquery cdn-->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <!--select2 cdn-->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
     <!-- password-addon init -->
     <script src="assets/js/pages/password-addon.init.js"></script>

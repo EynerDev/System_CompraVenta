@@ -1,6 +1,6 @@
 <?php
 
-    class usuario extends conectar{
+    class Usuario extends conectar{
         // TODO: Listar registros por sucursal id
         public function get_usuario_sucursal_id($suc_id){
             $conectar = parent::conexion();
@@ -74,6 +74,51 @@
             
             
         }
+
+        //TODO: Acceso al sistema
+        public function Login(){
+            $conectar = parent::conexion();
+            if(isset($_POST["enviar"])){
+                $sucursal = $_POST["suc_id"];
+                $correo = $_POST["email"];
+                $password = $_POST["password"];
+        
+                if(empty($correo) || empty($sucursal) || empty($password)){
+                    // Mostrar mensaje de error o redirigir con un mensaje de error
+                    echo "
+                    <div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                        Todos los campos son obligatorios.
+                        <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+                    </div>";
+                    return; // Salir de la función para evitar ejecución posterior
+                }
+        
+                // Realizar la consulta a la base de datos
+                $sql = "SP_LOGIN_USUARIO ?,?,?"; // Usar CALL para procedimientos almacenados
+                $sql_query = $conectar->prepare($sql);
+                $sql_query->bindValue(1, $sucursal);
+                $sql_query->bindValue(2, $correo);
+                $sql_query->bindValue(3, $password);
+                $sql_query->execute();
+                $resultado = $sql_query->fetch();
+        
+                if(is_array($resultado) && count($resultado) > 0){
+                    session_start(); // Asegúrate de que la sesión esté iniciada
+                    $_SESSION["USER_ID"] = $resultado["USER_ID"];
+                    $_SESSION["SUC_ID"] = $resultado["SUC_ID"];
+                    header("Location:".conectar::baseUrl()."Views/home/");
+                    exit();
+                } else {
+                    // Mostrar mensaje de error o redirigir con un mensaje de error
+                    echo "
+                    <div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                        Usuario o contraseña incorrectos.
+                        <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+                    </div>";
+                }
+            }
+        }
+        
 
     }
 

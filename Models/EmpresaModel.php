@@ -1,15 +1,16 @@
 <?php
 
-    class empresa extends conectar{
-        // TODO: Listar registros por sucursal id
-        public function get_empresa_compania_id($com_id){
+    class Empresa extends conectar{
+        // TODO: Listar registros por compañia id
+        public function get_empresa_compania_id($com_id) {
             $conectar = parent::conexion();
             $sql = "SP_L_EMPRESA_01 ?";
-            $sql_query=$conectar->prepare($sql);
-            $sql_query->bindValue(1, $com_id);
+            $sql_query = $conectar->prepare($sql);
+            $sql_query->bindValue(1, $com_id, PDO::PARAM_INT);
             $sql_query->execute();
-            return $sql_query->fecthAll(PDO::FECTH_ASSOC);     
+            return $sql_query->fetchAll(PDO::FETCH_ASSOC);
         }
+        
         // TODO: Listar registros por id 
         public function get_empresa_id($emp_id){
             $conectar = parent::conexion();

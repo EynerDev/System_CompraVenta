@@ -1,15 +1,16 @@
 <?php
 
     class sucursal extends conectar{
-        // TODO: Listar registros por sucursal id
-        public function get_sucursal_sucursal_id($emp_id){
+        // TODO: Listar registros por empresa id
+        public function get_sucursal_empresa_id($emp_id){
             $conectar = parent::conexion();
             $sql = "SP_L_SUCURSAL_01 ?";
-            $sql_query=$conectar->prepare($sql);
+            $sql_query = $conectar->prepare($sql);
             $sql_query->bindValue(1, $emp_id);
             $sql_query->execute();
-            return $sql_query->fecthAll(PDO::FECTH_ASSOC);     
+            return $sql_query->fetchAll(PDO::FETCH_ASSOC);
         }
+        
         // TODO: Listar registros por id 
         public function get_sucursal_id($suc_id){
             $conectar = parent::conexion();
@@ -17,7 +18,7 @@
             $sql_query=$conectar->prepare($sql);
             $sql_query->bindValue(1, $suc_id);
             $sql_query->execute();
-            return $sql_query->fecthAll(PDO::FECTH_ASSOC);
+            return $sql_query->fetchAll(PDO::FETCH_ASSOC);
             
         }
         // TODO: Eliminar registros
