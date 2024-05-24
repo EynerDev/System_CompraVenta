@@ -106,6 +106,13 @@
                     session_start(); // Asegúrate de que la sesión esté iniciada
                     $_SESSION["USER_ID"] = $resultado["USER_ID"];
                     $_SESSION["SUC_ID"] = $resultado["SUC_ID"];
+                    $_SESSION["USER_NAME"] = $resultado["USER_NAME"];
+                    $_SESSION["USER_APE"] = $resultado["USER_APE"];
+                    $_SESSION["USER_EMAIL"] = $resultado["USER_EMAIL"];
+                    $_SESSION["COM_ID"] = $resultado["COM_ID"];
+                    
+
+                    
                     header("Location:".conectar::baseUrl()."Views/home/");
                     exit();
                 } else {

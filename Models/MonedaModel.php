@@ -1,6 +1,6 @@
 <?php
 
-    class moneda extends conectar{
+    class Moneda extends conectar{
         // TODO: Listar registros por sucursal id
         public function get_moneda_sucursal_id($suc_id){
             $conectar = parent::conexion();
@@ -8,7 +8,7 @@
             $sql_query=$conectar->prepare($sql);
             $sql_query->bindValue(1, $suc_id);
             $sql_query->execute();
-            return $sql_query->fecthAll(PDO::FECTH_ASSOC);     
+            return $sql_query->fetchAll(PDO::FETCH_ASSOC);     
         }
         // TODO: Listar registros por id 
         public function get_moneda_id($mon_id){
@@ -17,7 +17,7 @@
             $sql_query=$conectar->prepare($sql);
             $sql_query->bindValue(1, $mon_id);
             $sql_query->execute();
-            return $sql_query->fecthAll(PDO::FECTH_ASSOC);
+            return $sql_query->fetchAll(PDO::FETCH_ASSOC);
             
         }
         // TODO: Eliminar registros

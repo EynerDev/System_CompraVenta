@@ -97,7 +97,7 @@ $usuario->Login();
                                         <div class="mt-4">
                                             <form action="" method="post" id="login_form">
 
-                                                <div class="col-lg-4">
+                                                <div class="mb-3">
                                                     <h6 class="fw-semibold">Empresa:</h6>
                                                     <select class="js-example-basic-single" id="emp_id" name="emp_id">
                                                     <option selected>Seleccionar Empresa</option>
@@ -105,7 +105,7 @@ $usuario->Login();
                                                     </select>
                                                 </div>
                                                 
-                                                <div class="col-lg-4">
+                                                <div class="mb-3">
                                                     <h6 class="fw-semibold">Sucursal:</h6>
                                                     <select class="js-example-basic-single" id="suc_id" name="suc_id">
                                                     <option selected>Seleccionar Sucursal</option>
