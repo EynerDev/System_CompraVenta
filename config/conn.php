@@ -1,7 +1,7 @@
 <?php
     // Inicia la sesión (debería estar antes de cualquier salida al navegador)
     session_start();
-    require_once __DIR__ . '/vendor/autoload.php';
+    require_once __DIR__ . '../../vendor/autoload.php';
     $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
     $dotenv->load();
 
@@ -36,7 +36,7 @@
         }
 
         public static function baseUrl(){
-            return "http://localhost/Compra_venta/";
+            return "http://localhost/System_CompraVenta/";
         }
     }
 ?>

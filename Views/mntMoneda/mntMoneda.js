@@ -4,28 +4,72 @@ function init(){
     });
 }
 
-function guardaryeditar(e){
+// function guardaryeditar(e){
+//     e.preventDefault();
+//     var formData = new FormData($("#mantenimiento_form")[0]);
+//     formData.append('suc_id',$('#SUC_IDx').val());
+//     $.ajax({
+//         url:"../../Controller/MonedaController.php?op=guardaryeditar",
+//         type:"POST",
+//         data:formData,
+//         contentType:false,
+//         processData:false,
+//         success:function(){
+//             $('#table_datos').DataTable().ajax.reload();
+//             $('#ModalMoneda').modal('hide');
+
+//             // Usar swal.fire en lugar de swal
+//             Swal.fire({
+//                 title:'Moneda',
+//                 text: 'Registro Exitoso',
+//                 icon: 'success'
+//             });
+//         }
+//     });
+// }
+function guardaryeditar(e) {
     e.preventDefault();
     var formData = new FormData($("#mantenimiento_form")[0]);
-    formData.append('suc_id',$('#SUC_IDx').val());
+    formData.append('suc_id', $('#SUC_IDx').val());
     $.ajax({
-        url:"../../Controller/MonedaController.php?op=guardaryeditar",
-        type:"POST",
-        data:formData,
-        contentType:false,
-        processData:false,
-        success:function(){
-            $('#table_datos').DataTable().ajax.reload();
-            $('#ModalMoneda').modal('hide');
-
-            swal.fire({
-                title:'Moneda',
-                text: 'Registro Exitoso',
-                icon: 'success'
-            });
-        }
+        url: "../../Controller/MonedaController.php?op=guardaryeditar",
+        type: "POST",
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function(response) {
+            console.log(response)
+            // Intenta analizar la respuesta como JSON
+            try {
+                if (response.success) {
+                    // La respuesta indica éxito
+                    $('#table_datos').DataTable().ajax.reload();
+                    $('#ModalMoneda').modal('hide');
+                    Swal.fire({
+                        title: 'Moneda',
+                        text:'Registro Agregado Exitosamente',
+                        icon: 'success'
+                    });
+                } else {
+                    // La respuesta indica un error
+                    Swal.fire({
+                        title: 'Error',
+                        text: response.message || 'Hubo un error al procesar la solicitud',
+                        icon: 'error'
+                    });
+                }
+            } catch (error) {
+                // La respuesta no es JSON válido
+                Swal.fire({
+                    title: 'Error',
+                    text: 'Hubo un error al procesar la solicitud', error,
+                    icon: 'error'
+                });
+            }
+        },
     });
 }
+
 
 $(document).ready(function() {
 
@@ -83,8 +127,8 @@ $(document).ready(function() {
     });
 });
 
-function editar(cat_id){
-    $.post("../../Controller/MonedaController.php?op=mostrar",{cat_id:cat_id}, function(data){
+function editar(mon_id){
+    $.post("../../Controller/MonedaController.php?op=mostrar",{mon_id:mon_id}, function(data){
         console.log(data)
         $("#mon_id").val(data.MON_ID)
         $("#mon_name").val(data.MON_NAME)
@@ -98,16 +142,17 @@ function editar(cat_id){
 function eliminar(mon_id){
     swal.fire({
         title: "Eliminar",
-        text: "Estas Seguro de eliminar este registro",
-        icon:"error",
-        confirmButtonText : "Si",
+        text: "¿Estás seguro de eliminar este registro?",
+        icon: "error",
         showCancelButton: true,
-        cancelButtonText: "No",
-
-    }).then((result => {
-        if (result.value){
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Sí, eliminar",
+        cancelButtonText: "Cancelar"
+    }).then((result) => {
+        if (result) {
             $.post("../../Controller/MonedaController.php?op=eliminar",{mon_id:mon_id}, function(data){
-              console.log(data)
+                console.log(data)
             })
            
             $("#table_datos").DataTable().ajax.reload();
@@ -115,14 +160,10 @@ function eliminar(mon_id){
             swal.fire({
                 title : "Compra y Venta",
                 text : "Registro Eliminado",
-                type : "success",
-                confirmButtonClass : "btn-success"
-
-
-            })
+                icon : "success",
+            });
         }
-
-    }));
+    });
 }
 
 

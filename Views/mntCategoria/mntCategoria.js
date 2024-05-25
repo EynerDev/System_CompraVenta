@@ -20,7 +20,6 @@ function guardaryeditar(e){
 
             swal.fire({
                 title:'Categoria',
-                text: 'Registro Exitoso',
                 icon: 'success'
             });
         }
@@ -99,11 +98,13 @@ function editar(cat_id){
 function eliminar(cat_id){
     swal.fire({
         title: "Eliminar",
-        text: "Estas Seguro de eliminar este registro",
-        icon:"error",
-        confirmButtonText : "Si",
+        text: "¿Estás seguro de eliminar este registro?",
+        icon: "error",
         showCancelButton: true,
-        cancelButtonText: "No",
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Sí, eliminar",
+        cancelButtonText: "Cancelar"
 
     }).then((result => {
         if (result.value){
@@ -116,7 +117,7 @@ function eliminar(cat_id){
             swal.fire({
                 title : "Compra y Venta",
                 text : "Registro Eliminado",
-                type : "success",
+                icon : "success",
                 confirmButtonClass : "btn-success"
 
 
