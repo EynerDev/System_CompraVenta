@@ -8,12 +8,30 @@
     switch($_GET["op"]){
     // TODO:Guardar y editar, guardar cuando el id en vacio y actualizar cuando id tiene un valor
         case "guardaryeditar":
-            if (empty($_POST["suc_id"])){
-                $sucursal->insert_sucursal($_POST["emp_id"],$_POST["suc_name"]);
-            }else{
-                $sucursal->update_sucursal($_POST["suc_id"],$_POST["emp_id"],$_POST["suc_name"]);
+        $suc_id = isset($_POST["suc_id"]) ? $_POST["suc_id"] : null;
+        $suc_name = isset($_POST["suc_name"]) ? $_POST["suc_name"] : null;
+        $emp_id = isset($_POST["emp_id"]) ? $_POST["emp_id"] : null;
+        
+        if ($emp_id && $suc_name) {
+            if (empty($suc_id)){
+                $sucursal->insert_sucursal($emp_id, $suc_name);
+                echo json_encode([
+                    'success' => true,
+                    'message' => 'Sucursal creada exitosamente'
+                ]);
+            } else {
+                $sucursal->update_sucursal($suc_id, $suc_name);
+                echo json_encode([
+                    'success' => true, 
+                    'message' => 'Registro actualizado exitosamente.'
+                ]);
             }
-            break;
+        } else {
+            echo json_encode([
+                'success' => false, 
+                'message' => 'Datos incompletos.']);
+        }
+        break;
 
         // TODO: Listado de registros formato JSON para datatable JS
         case "listar":
@@ -22,21 +40,20 @@
             $data  = array();
             foreach($datos as $row){
                 $sub_array = array();
-                $sub_array = $row["suc_id"];
-                $sub_array = $row["suc_name"];
-                $sub_array = $row["emp_id"];
-                $sub_array = "Eliminar";
-                $sub_array = "Editar";
+                $sub_array[] = $row["SUC_NAME"];
+                $sub_array[] = $row["CREATED_AT"];
+                $sub_array[] = '<button type="button" onClick="editar('.$row["SUC_ID"].')" id="'.$row["SUC_ID"].'" class="btn btn-warning btn-label waves-effect waves-light"><i class="ri-edit-box-fill label-icon align-middle fs-16 me-2"></i> Editar</button>';
+                $sub_array[] = '<button type="button" onClick="eliminar('.$row["SUC_ID"].')" id="'.$row["SUC_ID"].'" class="btn btn-danger btn-label waves-effect waves-light"><i class="ri-delete-bin-5-line label-icon align-middle fs-16 me-2"></i> Eliminar</button>';
                 $data[] = $sub_array;
 
-                $results = array(
-                    "sEcho" => 1,
-                    "iTotalRecords" => count($data),
-                    "iTotalDisplayRecords" => count($data),
-                    "aaData" => $data
-                );
-                echo json_encode($results);
             }
+            $results = array(
+                "sEcho" => 1,
+                "iTotalRecords" => count($data),
+                "iTotalDisplayRecords" => count($data),
+                "aaData" => $data
+            );
+            echo json_encode($results);
 
             break;
         // TODO: Mostrar informacion de un registro por su id
@@ -44,17 +61,27 @@
             $datos = $sucursal->get_sucursal_id($_POST["suc_id"]);
             if(is_array($datos)==TRUE and count($datos)>0){
                 foreach($datos as $row){
-                    $output["suc_id"] = $row["suc_id"];
-                    $output["emp_id"] = $row["emp_id"];
-                    $output["suc_name"] = $row["suc_name"];
+                    $output["SUC_ID"]=$row["SUC_ID"];
+                    $output["EMP_ID"]=$row["EMP_ID"];
+                    $output["SUC_NAME"] = $row["SUC_NAME"];
+
                 }
                 echo json_encode($output);
             }
             break;
         // TODO: Cambiar estado de registro a 0
         case "eliminar":
-            $sucursal->delete_sucursal($_POST["suc_id"]);
-            break;
+            $suc = isset($_POST["suc_id"]) ? $_POST["suc_id"] : null;
+
+        if ($suc === $_SESSION["SUC_ID"]) {
+            echo json_encode(['success' => false, 'message' => 'No puedes eliminar la Sucursal', 'icon' => 'error']);
+        } else {
+            $sucursal->delete_sucursal($suc);
+            echo json_encode(['success' => true, 'message' => 'Registro eliminado exitosamente.', 'icon' => 'success']);
+            
+        }
+        break;
+
 
         case "combo":
             var_dump($_POST["emp_id"]);

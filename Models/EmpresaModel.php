@@ -18,7 +18,7 @@
             $sql_query=$conectar->prepare($sql);
             $sql_query->bindValue(1, $emp_id);
             $sql_query->execute();
-            return $sql_query->fecthAll(PDO::FECTH_ASSOC);
+            return $sql_query->fetchAll(PDO::FETCH_ASSOC);
             
         }
         // TODO: Eliminar registros

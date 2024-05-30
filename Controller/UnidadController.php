@@ -1,62 +1,84 @@
 <?php
-// TODO:llamando clases
-    require_once ("..config/conn.php");
-    require_once("..Models/UnidadModel.php");
-// TODO:Inicializando clase Unidad
-    $unidad = new UnidadModel();
+// TODO: Llamando clases
+require_once ("../Config/conn.php");
+require_once("../Models/UnidadModel.php");
 
-    switch($_GET["op"]){
-        // TODO:Guardar y editar, guardar cuando el id en vacio y actualizar cuando id tiene un valor
-        case "guardaryeditar":
-            if (empty($_POST["uni_id"])){
-                $unidad->insert_unidad($_POST["suc_id"],$_POST["unid_name"]);
-            }else{
-                $unidad->update_unidad($_POST["uni_id"],$_POST["suc_id"],$_POST["unid_name"]);
+// TODO: Inicializando clase Unidad
+$unidad = new Unidad();
+
+switch($_GET["op"]){
+    // TODO: Guardar y editar, guardar cuando el id en vacío y actualizar cuando id tiene un valor
+    case "guardaryeditar":
+        $suc_id = isset($_POST["suc_id"]) ? $_POST["suc_id"] : null;
+        $unid_name = isset($_POST["unid_name"]) ? $_POST["unid_name"] : null;
+        $uni_id = isset($_POST["uni_id"]) ? $_POST["uni_id"] : null;
+        
+        if ($suc_id && $unid_name) {
+            if (empty($uni_id)){
+                $unidad->insert_unidad($suc_id, $unid_name);
+                echo json_encode([
+                    'success' => true,
+                    'message' => 'Registro creado exitosamente'
+                ]);
+            } else {
+                $unidad->update_unidad($uni_id, $suc_id, $unid_name);
+                echo json_encode([
+                    'success' => true, 
+                    'message' => 'Registro actualizado exitosamente.'
+                ]);
             }
-            break;
+        } else {
+            echo json_encode([
+                'success' => false,
+                 'message' => 'Datos incompletos.']);
+        }
+        break;
 
-            // TODO: Listado de registros formato JSON para datatable JS
-        case "listar":
+    // TODO: Listado de registros formato JSON para datatable JS
+    case "listar":
+        // Obtener datos de la base de datos
+        $datos = $unidad->get_unidad_sucursal_id($_POST["suc_id"]);
+        $data = array();
 
-            $datos = $unidad->get_unidad_sucursal_id($_POST["suc_id"]);
-            $data  = array();
+        // Recorrer los datos y preparar el array para DataTables
+        foreach ($datos as $row) {
+            $sub_array = array();
+            $sub_array[] = $row["UNID_NAME"];
+            $sub_array[] = $row["CREATED_AT"];
+            $sub_array[] = '<button type="button" onClick="editar('.$row["UNI_ID"].')" id="'.$row["UNI_ID"].'" class="btn btn-warning btn-label waves-effect waves-light"><i class="ri-edit-box-fill label-icon align-middle fs-16 me-2"></i> Editar</button>';
+            $sub_array[] = '<button type="button" onClick="eliminar('.$row["UNI_ID"].')" id="'.$row["UNI_ID"].'" class="btn btn-danger btn-label waves-effect waves-light"><i class="ri-delete-bin-5-line label-icon align-middle fs-16 me-2"></i> Eliminar</button>'; 
+            $data[] = $sub_array;
+        }
+
+        // Preparar la estructura final de la respuesta para DataTables
+        $results = array(
+            "sEcho" => 1,
+            "iTotalRecords" => count($data),
+            "iTotalDisplayRecords" => count($data),
+            "aaData" => $data
+        );
+
+        // Enviar la respuesta JSON
+        echo json_encode($results);
+        break;
+
+    // TODO: Mostrar informacion de un registro por su id
+    case "mostrar":
+        $datos = $unidad->get_unidad_id($_POST["uni_id"]);
+        if(is_array($datos) == TRUE and count($datos) > 0){
             foreach($datos as $row){
-                $sub_array = array();
-                $sub_array = $row["unid_name"];
-                $sub_array = "Eliminar";
-                $sub_array = "Editar";
-                $data[] = $sub_array;
-
-                $results = array(
-                    "sEcho" => 1,
-                    "iTotalRecords" => count($data),
-                    "iTotalDisplayRecords" => count($data),
-                    "aaData" => $data
-                );
-                echo json_encode($results);
+                $output["UNI_ID"] = $row["UNI_ID"];
+                $output["SUC_ID"] = $row["SUC_ID"];
+                $output["UNID_NAME"] = $row["UNID_NAME"];
             }
+            echo json_encode($output);
+        }
+        break;
 
-            break;
-            // TODO: Mostrar informacion de un registro por su id
-        case "mostrar":
-            $datos = $unidad->get_unidad_id($_POST["uni_id"]);
-            if(is_array($datos)==TRUE and count($datos)>0){
-                foreach($datos as $row){
-                    $output["uni_id"] = $row["uni_id"];
-                    $output["suc_id"] = $row["suc_id"];
-                    $output["unid_name"] = $row["unid_name"];
-                }
-                echo json_encode($output);
-            }
-            break;
-            // TODO: Cambiar estado de registro a 0
-        case "eliminar":
-            $unidad->delete_unidad($_POST["uni_id"]);
-            break;
-
-    }
-
-
-
-
+    // TODO: Cambiar estado de registro a 0
+    case "eliminar":
+        $unidad->delete_unidad($_POST["uni_id"]);
+        echo json_encode(['success' => true, 'message' => 'Registro eliminado exitosamente.']);
+        break;
+}
 ?>

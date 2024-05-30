@@ -38,37 +38,28 @@ function guardaryeditar(e) {
         contentType: false,
         processData: false,
         success: function(response) {
-            console.log(response)
             // Intenta analizar la respuesta como JSON
-            try {
-                if (response.success) {
+                if (response) {
+                    data=JSON.parse(response)
                     // La respuesta indica éxito
                     $('#table_datos').DataTable().ajax.reload();
                     $('#ModalMoneda').modal('hide');
                     Swal.fire({
                         title: 'Moneda',
-                        text:'Registro Agregado Exitosamente',
+                        text:data.message,
                         icon: 'success'
                     });
                 } else {
                     // La respuesta indica un error
                     Swal.fire({
                         title: 'Error',
-                        text: response.message || 'Hubo un error al procesar la solicitud',
+                        text: data.message,
                         icon: 'error'
                     });
                 }
-            } catch (error) {
-                // La respuesta no es JSON válido
-                Swal.fire({
-                    title: 'Error',
-                    text: 'Hubo un error al procesar la solicitud', error,
-                    icon: 'error'
-                });
             }
         },
-    });
-}
+)}
 
 
 $(document).ready(function() {
@@ -129,7 +120,7 @@ $(document).ready(function() {
 
 function editar(mon_id){
     $.post("../../Controller/MonedaController.php?op=mostrar",{mon_id:mon_id}, function(data){
-        console.log(data)
+        data = JSON.parse(data)
         $("#mon_id").val(data.MON_ID)
         $("#mon_name").val(data.MON_NAME)
     })
@@ -152,7 +143,6 @@ function eliminar(mon_id){
     }).then((result) => {
         if (result) {
             $.post("../../Controller/MonedaController.php?op=eliminar",{mon_id:mon_id}, function(data){
-                console.log(data)
             })
            
             $("#table_datos").DataTable().ajax.reload();

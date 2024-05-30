@@ -4,25 +4,38 @@ function init(){
     });
 }
 
-function guardaryeditar(e){
+function guardaryeditar(e) {
     e.preventDefault();
     var formData = new FormData($("#mantenimiento_form")[0]);
-    formData.append('suc_id',$('#SUC_IDx').val());
+    formData.append('suc_id', $('#SUC_IDx').val());
     $.ajax({
-        url:"../../Controller/CategoriaController.php?op=guardaryeditar",
-        type:"POST",
-        data:formData,
-        contentType:false,
-        processData:false,
-        success:function(){
-            $('#table_datos').DataTable().ajax.reload();
-            $('#ModalCategoria').modal('hide');
-
-            swal.fire({
-                title:'Categoria',
-                icon: 'success'
-            });
-        }
+        url: "../../Controller/CategoriaController.php?op=guardaryeditar",
+        type: "POST",
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function(response) {
+            // Intenta analizar la respuesta como JSON
+                if (response) {
+                    data = JSON.parse(response)
+                    // La respuesta indica éxito
+                    $('#table_datos').DataTable().ajax.reload();
+                    $('#ModalCategoria').modal('hide');
+                    Swal.fire({
+                        title: 'Categoria',
+                        text:data.message,
+                        icon: 'success'
+                    });
+                } else {
+                    // La respuesta indica un error
+                    Swal.fire({
+                        title: 'Error',
+                        text: data.message,
+                        icon: 'error'
+                    });
+                }
+            
+        },
     });
 }
 
@@ -85,7 +98,7 @@ $(document).ready(function() {
 
 function editar(cat_id){
     $.post("../../Controller/CategoriaController.php?op=mostrar",{cat_id:cat_id}, function(data){
-        console.log(data)
+        data=JSON.parse(data);
         $("#cat_id").val(data.CAT_ID)
         $("#cat_name").val(data.CAT_NAME)
     })

@@ -110,6 +110,7 @@
                     $_SESSION["USER_APE"] = $resultado["USER_APE"];
                     $_SESSION["USER_EMAIL"] = $resultado["USER_EMAIL"];
                     $_SESSION["COM_ID"] = $resultado["COM_ID"];
+                    $_SESSION["EMP_ID"] = $resultado["EMP_ID"];
                     
 
                     

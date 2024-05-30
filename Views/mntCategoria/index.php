@@ -1,6 +1,6 @@
 <?php
-    require_once("../../Config/conn.php")
-
+    require_once("../../Config/conn.php");
+    if (isset($_SESSION["USU_ID"])){
 ?>
 
 <!doctype html>
@@ -60,7 +60,6 @@
                                             <table id="table_datos" name="table_datos" class="table table-bordered dt-responsive nowrap table-striped align-middle" style="width:100%">
                                                 <thead>
                                                     <tr>
-                                                        <th>cat_id</th>
                                                         <th>Nombre</th>
                                                         <th>Fecha de Creación</th>
                                                         <th></th>
@@ -719,3 +718,8 @@
 </body>
 
 </html>
+<?php
+}else{
+    header("Location:".conectar::baseUrl()."Views/404/");
+}
+?>

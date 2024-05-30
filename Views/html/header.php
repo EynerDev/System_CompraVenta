@@ -36,6 +36,9 @@
                     </div>
 
                     <input type="hidden" name="SUC_IDx" id="SUC_IDx" value=<?php echo $_SESSION["SUC_ID"]  ?>>
+                    <input type="hidden" name="COM_IDx" id="COM_IDx" value=<?php echo $_SESSION["COM_ID"]  ?>>
+                    <input type="hidden" name="EMP_IDx" id="EMP_IDx" value=<?php echo $_SESSION["EMP_ID"]  ?>>
+
 
                     <div class="d-flex align-items-center">
 

@@ -1,7 +1,4 @@
 <?php
-// Configurar la cabecera para JSON
-header('Content-Type: application/json');
-
 // TODO: Llamando clases
 require_once ("../Config/conn.php");
 require_once("../Models/MonedaModel.php");
@@ -21,6 +18,7 @@ switch($_GET["op"]){
                 $moneda->insert_moneda($suc_id, $mon_name);
                 echo json_encode([
                     'success' => true,
+                    'message' => 'Moneda creada exitosamente'
                 ]);
             } else {
                 $moneda->update_moneda($mon_id, $suc_id, $mon_name);
@@ -30,7 +28,9 @@ switch($_GET["op"]){
                 ]);
             }
         } else {
-            echo json_encode(['success' => false, 'message' => 'Datos incompletos.']);
+            echo json_encode([
+                'success' => false,
+                 'message' => 'Datos incompletos.']);
         }
         break;
 
@@ -68,7 +68,6 @@ switch($_GET["op"]){
         $datos = $moneda->get_moneda_id($_POST["mon_id"]);
         if(is_array($datos) == TRUE and count($datos) > 0){
             foreach($datos as $row){
-                $output["MON_ID"] = $row["MON_ID"];
                 $output["SUC_ID"] = $row["SUC_ID"];
                 $output["MON_NAME"] = $row["MON_NAME"];
             }
