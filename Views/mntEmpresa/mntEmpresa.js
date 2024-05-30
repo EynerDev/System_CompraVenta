@@ -1,3 +1,4 @@
+let com_id = $('#COM_IDx').val()
 function init(){
     $("#mantenimiento_form").on("submit",function(e){
         guardaryeditar(e);
@@ -54,7 +55,7 @@ $(document).ready(function() { // Puedes obtener este valor dinámicamente segú
         "ajax": {
             url: "../../controller/EmpresaController.php?op=listar",
             type: "post",
-            data: { com_id : 1},
+            data: { com_id : com_id},
             dataSrc: function(json) {
                 console.log("Response from server:", json); // Depurar la respuesta del servidor
                 if (!json.aaData) {

@@ -81,33 +81,29 @@
             $empresa->delete_empresa($_POST["emp_id"]);
             break;
 
-            case "combo":
-                // Asegúrate de que com_id esté presente en $_POST
-                if (isset($_POST["com_id"])) {
+        case "combo":
+            // Asegúrate de que com_id esté presente en $_POST
+            if (isset($_POST["com_id"])) {
+                
+                // Convertir com_id a entero
+                $valor = (int)$_POST["com_id"];
                     
-                    // Convertir com_id a entero
-                    $valor = (int)$_POST["com_id"];
-                    
-                    // Obtener los datos de la empresa
-                    $datos = $empresa->get_empresa_compania_id($valor);   
-                    if (is_array($datos) && count($datos) > 0) {
-                        $html = "<option selected>Seleccionar Empresa</option>";
-                        foreach ($datos as $row) {
-                            $html .= "<option value='" . $row["EMP_ID"] . "'>" . $row["EMP_NAME"] . "</option>";
-                        }
-                        echo $html;
-                    } else {
-                        // Manejar el caso donde no se encuentran datos
-                        echo "<option selected>No se encontraron empresas</option>";
+                // Obtener los datos de la empresa
+                $datos = $empresa->get_empresa_compania_id($valor);   
+                if (is_array($datos) && count($datos) > 0) {
+                    $html = "<option selected>Seleccionar Empresa</option>";
+                    foreach ($datos as $row) {
+                        $html .= "<option value='" . $row["EMP_ID"] . "'>" . $row["EMP_NAME"] . "</option>";
                     }
+                    echo $html;
                 } else {
+                    // Manejar el caso donde no se encuentran datos
+                    echo "<option selected>No se encontraron empresas</option>";
+                    }
+            } else {
                     // Manejar el caso donde com_id no está presente en la solicitud POST
-                    echo "Error: com_id no está definido.";
-                }
-                break;
-            
-
-
-
+                echo "Error: com_id no está definido.";
+            }
+            break;
         }
 ?>

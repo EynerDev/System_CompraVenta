@@ -1,7 +1,6 @@
 <?php
     require_once("../../Config/conn.php");
-    if (isset($_SESSION["USU_ID"])){
-
+    if (isset($_SESSION["USER_ID"])){
 ?>
 
 <!doctype html>

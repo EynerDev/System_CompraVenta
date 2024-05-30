@@ -1,3 +1,4 @@
+let suc_id = $('#SUC_IDx').val()
 function init(){
     $("#mantenimiento_form").on("submit",function(e){
         guardaryeditar(e);
@@ -40,8 +41,6 @@ function guardaryeditar(e) {
 }
 
 $(document).ready(function() {
-    var suc_id = 1; // Puedes obtener este valor dinámicamente según tus necesidades
-
     $('#table_datos').DataTable({
         "aProcessing": true,
         "aServerSide": true,
@@ -52,9 +51,9 @@ $(document).ready(function() {
             'csvHtml5',
         ],
         "ajax": {
-            url: "../../controller/CategoriaController.php?op=listar",
+            url: "../../Controller/CategoriaController.php?op=listar",
             type: "post",
-            data: { suc_id : 1},
+            data: { suc_id : suc_id},
             dataSrc: function(json) {
                 console.log("Response from server:", json); // Depurar la respuesta del servidor
                 if (!json.aaData) {

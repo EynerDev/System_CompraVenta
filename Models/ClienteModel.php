@@ -1,6 +1,6 @@
 <?php
 
-    class cliente extends conectar{
+    class Cliente extends conectar{
         // TODO: Listar registros por sucursal id
         public function get_cliente_empresa_id($emp_id){
             $conectar = parent::conexion();
@@ -8,7 +8,7 @@
             $sql_query=$conectar->prepare($sql);
             $sql_query->bindValue(1, $emp_id);
             $sql_query->execute();
-            return $sql_query->fecthAll(PDO::FECTH_ASSOC);     
+            return $sql_query->fetchAll(PDO::FETCH_ASSOC);     
         }
         // TODO: Listar registros por id 
         public function get_cliente_id($cli_id){
@@ -17,7 +17,7 @@
             $sql_query=$conectar->prepare($sql);
             $sql_query->bindValue(1, $cli_id);
             $sql_query->execute();
-            return $sql_query->fecthAll(PDO::FECTH_ASSOC);
+            return $sql_query->fetchAll(PDO::FETCH_ASSOC);
             
         }
         // TODO: Eliminar registros
@@ -31,7 +31,13 @@
             
         }
         // TODO: Insertar registros  
-        public function insert_cliente($emp_id, $tipo_doc_id, $cli_doc, $cli_name, $cli_number, $cli_direcc, $cli_email){
+        public function insert_cliente(
+                                        $emp_id,
+                                        $tipo_doc_id,
+                                        $cli_doc, $cli_name,
+                                        $cli_number, 
+                                        $cli_direcc, 
+                                        $cli_email){
             $conectar = parent::conexion();
             $sql = "SP_I_CLIENTE_01 ?,?,?,?,?,?,?";
             $sql_query=$conectar->prepare($sql);

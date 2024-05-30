@@ -1,22 +1,14 @@
 <?php
 
-    class tipodoc extends conectar{
-        // TODO: Listar registros por sucursal id
-        public function get_tipodoc_sucursal_id(){
-            $conectar = parent::conexion();
-            $sql = "SP_L_TIPODOC_01 ?";
-            $sql_query=$conectar->prepare($sql);
-            $sql_query->execute();
-            return $sql_query->fecthAll(PDO::FECTH_ASSOC);     
-        }
+    class Tipodoc extends conectar{
+
         // TODO: Listar registros por id 
-        public function get_tipodoc_id($tipo_doc_id){
+        public function get_tipodoc_id(){
             $conectar = parent::conexion();
-            $sql = "SP_L_TIPODOC_02 ?";
+            $sql = "SP_L_TIPODOC_01";
             $sql_query=$conectar->prepare($sql);
-            $sql_query->bindValue(1, $tipo_doc_id);
             $sql_query->execute();
-            return $sql_query->fecthAll(PDO::FECTH_ASSOC);
+            return $sql_query->fetchAll(PDO::FETCH_ASSOC);
             
         }
         // TODO: Eliminar registros

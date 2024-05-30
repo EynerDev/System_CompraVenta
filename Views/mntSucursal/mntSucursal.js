@@ -1,3 +1,5 @@
+let emp_id = $('#EMP_IDx').val()
+
 function init(){
     $("#mantenimiento_form").on("submit",function(e){
         guardaryeditar(e);
@@ -54,7 +56,7 @@ $(document).ready(function() {
         "ajax": {
             url: "../../controller/SucursalController.php?op=listar",
             type: "post",
-            data: { emp_id : 1},
+            data: { emp_id : emp_id},
             dataSrc: function(json) {
                 console.log("Response from server:", json); // Depurar la respuesta del servidor
                 if (!json.aaData) {

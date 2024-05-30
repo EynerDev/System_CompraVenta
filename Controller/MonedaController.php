@@ -43,7 +43,6 @@ switch($_GET["op"]){
         // Recorrer los datos y preparar el array para DataTables
         foreach ($datos as $row) {
             $sub_array = array();
-            $sub_array[] = $row["MON_ID"];
             $sub_array[] = $row["MON_NAME"];
             $sub_array[] = $row["CREATED_AT"];
             $sub_array[] = '<button type="button" onClick="editar('.$row["MON_ID"].')" id="'.$row["MON_ID"].'" class="btn btn-warning btn-label waves-effect waves-light"><i class="ri-edit-box-fill label-icon align-middle fs-16 me-2"></i> Editar</button>';

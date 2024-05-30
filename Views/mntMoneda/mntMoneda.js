@@ -1,32 +1,11 @@
+let suc_id = $('#SUC_IDx').val()
+
 function init(){
     $("#mantenimiento_form").on("submit",function(e){
         guardaryeditar(e);
     });
 }
 
-// function guardaryeditar(e){
-//     e.preventDefault();
-//     var formData = new FormData($("#mantenimiento_form")[0]);
-//     formData.append('suc_id',$('#SUC_IDx').val());
-//     $.ajax({
-//         url:"../../Controller/MonedaController.php?op=guardaryeditar",
-//         type:"POST",
-//         data:formData,
-//         contentType:false,
-//         processData:false,
-//         success:function(){
-//             $('#table_datos').DataTable().ajax.reload();
-//             $('#ModalMoneda').modal('hide');
-
-//             // Usar swal.fire en lugar de swal
-//             Swal.fire({
-//                 title:'Moneda',
-//                 text: 'Registro Exitoso',
-//                 icon: 'success'
-//             });
-//         }
-//     });
-// }
 function guardaryeditar(e) {
     e.preventDefault();
     var formData = new FormData($("#mantenimiento_form")[0]);
@@ -76,7 +55,7 @@ $(document).ready(function() {
         "ajax": {
             url: "../../controller/MonedaController.php?op=listar",
             type: "post",
-            data: { suc_id : 1},
+            data: { suc_id : suc_id},
             dataSrc: function(json) {
                 console.log("Response from server:", json); // Depurar la respuesta del servidor
                 if (!json.aaData) {

@@ -18,7 +18,6 @@ $(document).ready(function(){
 // Añade un listener de evento change al elemento #emp_id
 $("#emp_id").change(function() {
     var emp_id = $(this).val();
-    console.log("Empresa seleccionada:", emp_id);
 
     // Realiza una solicitud AJAX POST a SucursalController.php con el emp_id seleccionado
     $.post("Controller/SucursalController.php?op=combo", { emp_id: emp_id })
