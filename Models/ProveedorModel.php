@@ -1,6 +1,6 @@
 <?php
 
-    class proveedor extends conectar{
+    class Proveedor extends conectar{
         // TODO: Listar registros por sucursal id
         public function get_proveedor_empresa_id($emp_id){
             $conectar = parent::conexion();
@@ -8,7 +8,7 @@
             $sql_query=$conectar->prepare($sql);
             $sql_query->bindValue(1, $emp_id);
             $sql_query->execute();
-            return $sql_query->fecthAll(PDO::FECTH_ASSOC);     
+            return $sql_query->fetchAll(PDO::FETCH_ASSOC);     
         }
         // TODO: Listar registros por id 
         public function get_proveedor_id($prov_id){
@@ -17,7 +17,7 @@
             $sql_query=$conectar->prepare($sql);
             $sql_query->bindValue(1, $prov_id);
             $sql_query->execute();
-            return $sql_query->fecthAll(PDO::FECTH_ASSOC);
+            return $sql_query->fetchAll(PDO::FETCH_ASSOC);
             
         }
         // TODO: Eliminar registros
@@ -46,7 +46,7 @@
             
         }
         // TODO: Actualizar registros  
-        public function update_proveedor($prov_id,$emp_id, $prov_rut, $prov_name, $prov_number, $prov_dirc, $prov_email){
+        public function update_proveedor($prov_id,$emp_id, $prov_name, $prov_rut, $prov_number, $prov_dirc, $prov_email){
             $conectar = parent::conexion();
             $sql = "SP_U_PROVEEDOR_01 ?,?,?,?,?,?,?";
             $sql_query=$conectar->prepare($sql);
