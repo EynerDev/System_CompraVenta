@@ -1,6 +1,6 @@
 <?php
 
-    class producto extends conectar{
+    class Producto extends conectar{
         // TODO: Listar registros por sucursal id
         public function get_producto_sucursal_id($suc_id){
             $conectar = parent::conexion();
@@ -8,7 +8,7 @@
             $sql_query=$conectar->prepare($sql);
             $sql_query->bindValue(1, $suc_id);
             $sql_query->execute();
-            return $sql_query->fecthAll(PDO::FECTH_ASSOC);     
+            return $sql_query->fetchAll(PDO::FETCH_ASSOC);     
         }
         // TODO: Listar registros por id 
         public function get_producto_id($prod_id){
@@ -17,7 +17,7 @@
             $sql_query=$conectar->prepare($sql);
             $sql_query->bindValue(1, $prod_id);
             $sql_query->execute();
-            return $sql_query->fecthAll(PDO::FECTH_ASSOC);
+            return $sql_query->fetchAll(PDO::FETCH_ASSOC);
             
         }
         // TODO: Eliminar registros
