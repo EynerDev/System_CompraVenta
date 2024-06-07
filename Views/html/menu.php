@@ -1,4 +1,11 @@
 <!-- ========== App Menu ========== -->
+<?php
+require_once("../../Models/MenuModel.php");
+$menu = new Menu;
+$datos = $menu->get_menu_role_id($_SESSION["USER_ROLE_ID"]);
+// echo  json_decode($datos)
+
+?>
 <div class="app-menu navbar-menu">
             <!-- LOGO -->
             <div class="navbar-brand-box">
@@ -32,53 +39,40 @@
                     </div>
                     <ul class="navbar-nav" id="navbar-nav">
                         <li class="menu-title"><span data-key="t-menu">Menu</span></li>
-                        <li class="nav-item">
-                            <a class="nav-link menu-link" href="../home/" role="button" aria-expanded="false" aria-controls="sidebarDashboards">
-                                <i class="ri-dashboard-2-line"></i> <span data-key="t-dashboards">Dashboards</span>
-                            </a>
-                        </li>
+                        <?php
+                            foreach($datos as $row){
+                                if ($row["MEND_GROUP"]=="Dashboard" &&  $row["MEND_PERMISO"]=="SI"){
+                                    ?>
+                                        <li class="nav-item">
+                                            <a class="nav-link menu-link" href="<?php echo $row["MEN_RUTA"]?>" role="button" aria-expanded="false" aria-controls="sidebarDashboards">
+                                                <i class="<?php echo $row["ICON"]?>"></i> <span data-key="t-dashboards"><?php echo $row["MEN_NAME"]?></span>
+                                            </a>
+                                        </li>
+
+                                    <?php
+
+                                }
+                            }
+                        
+                        ?>
                     
                         <li class="menu-title"><span data-key="t-menu">Mantenimiento</span></li>
-                        <li class="nav-item">
-                            <a class="nav-link menu-link" href="../mntCategoria/" role="button" aria-expanded="false" aria-controls="sidebarDashboards">
-                                <i class="bx bx-grid-small"></i> <span data-key="t-dashboards">Categoria</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link menu-link" href="../mntProducto/" role="button" aria-expanded="false" aria-controls="sidebarDashboards">
-                                <i class="bx bxs-shopping-bag"></i> <span data-key="t-dashboards">Producto</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link menu-link" href="../mntCliente" role="button" aria-expanded="false" aria-controls="sidebarDashboards">
-                                <i class="bx bx-user-pin"></i> <span data-key="t-dashboards">Cliente</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link menu-link" href="../mntProveedor/" role="button" aria-expanded="false" aria-controls="sidebarDashboards">
-                                <i class="bx bx-calendar-week"></i> <span data-key="t-dashboards">Proveedor</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link menu-link" href="../mntMoneda/" role="button" aria-expanded="false" aria-controls="sidebarDashboards">
-                                <i class="bx bxs-coin"></i> <span data-key="t-dashboards">Moneda</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link menu-link" href="../mntUndMedida/" role="button" aria-expanded="false" aria-controls="sidebarDashboards">
-                                <i class="bx bx-money-withdraw"></i> <span data-key="t-dashboards">Unidad Medida</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link menu-link" href="../mntEmpresa/" role="button" aria-expanded="false" aria-controls="sidebarDashboards">
-                                <i class="bx bxs-buildings"></i> <span data-key="t-dashboards">Empresa</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link menu-link" href="../mntSucursal/" role="button" aria-expanded="false" aria-controls="sidebarDashboards">
-                                <i class="bx bx-map"></i> <span data-key="t-dashboards">Sucursal</span>
-                            </a>
-                        </li>
+                        <?php
+                            foreach($datos as $row){
+                                if ($row["MEND_GROUP"]=="Mantenimiento" &&  $row["MEND_PERMISO"]=="SI"){
+                                    ?>
+                                        <li class="nav-item">
+                                            <a class="nav-link menu-link" href="<?php echo $row["MEN_RUTA"]?>" role="button" aria-expanded="false" aria-controls="sidebarDashboards">
+                                                <i class="<?php echo $row["ICON"]?>"></i> <span data-key="t-dashboards"><?php echo $row["MEN_NAME"]?></span>
+                                            </a>
+                                        </li>
+
+                                    <?php
+
+                                }
+                            }
+                        
+                        ?>
                         <li class="menu-title"><span data-key="t-menu">Compra</span></li>
                         <li class="menu-title"><span data-key="t-menu">Venta</span></li>
                     </ul>

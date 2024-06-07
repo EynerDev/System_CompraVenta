@@ -80,5 +80,19 @@ switch($_GET["op"]){
         $categoria->delete_categoria($_POST["cat_id"]);
         echo json_encode(['success' => true, 'message' => 'Registro eliminado exitosamente.']);
         break;
+    case "combo":
+        // Obtener los datos de la empresa
+        $datos = $categoria->get_categoria_suc_id($_POST["suc_id"]);   
+        if (is_array($datos) && count($datos) > 0) {
+            $html = "<option selected>Seleccionar Tipo Documento</option>";
+            foreach ($datos as $row) {
+                $html .= "<option value='" . $row["CAT_ID"] . "'>" . $row["CAT_NAME"] . "</option>";
+            }
+            echo $html;
+        } else {
+            // Manejar el caso donde no se encuentran datos
+            echo "<option selected>No se encontraron categorias</option>";
+        }
+        break;
 }
 ?>

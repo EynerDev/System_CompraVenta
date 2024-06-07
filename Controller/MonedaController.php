@@ -79,5 +79,21 @@ switch($_GET["op"]){
         $moneda->delete_moneda($_POST["mon_id"]);
         echo json_encode(['success' => true, 'message' => 'Registro eliminado exitosamente.']);
         break;
+    case "combo":
+            // Obtener los datos de la empresa
+            $datos = $moneda->get_moneda_sucursal_id($_POST["suc_id"]);   
+            if (is_array($datos) && count($datos) > 0) {
+                $html = "<option selected>Seleccionar Moneda</option>";
+                foreach ($datos as $row) {
+                    $html .= "<option value='" . $row["MON_ID"] . "'>" . $row["MON_NAME"] . "</option>";
+                }
+                echo $html;
+            } else {
+                // Manejar el caso donde no se encuentran datos
+                echo "<option selected>No se encontraron categorias</option>";
+            }
+            break;
+
+
 }
 ?>

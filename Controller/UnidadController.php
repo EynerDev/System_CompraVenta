@@ -80,5 +80,19 @@ switch($_GET["op"]){
         $unidad->delete_unidad($_POST["uni_id"]);
         echo json_encode(['success' => true, 'message' => 'Registro eliminado exitosamente.']);
         break;
+    case "combo":
+        // Obtener los datos de la empresa
+        $datos = $unidad->get_unidad_sucursal_id($_POST["suc_id"]);   
+        if (is_array($datos) && count($datos) > 0) {
+            $html = "<option selected>Seleccionar Unidad</option>";
+            foreach ($datos as $row) {
+                $html .= "<option value='" . $row["UNI_ID"] . "'>" . $row["UNID_NAME"] . "</option>";
+            }
+            echo $html;
+        } else {
+            // Manejar el caso donde no se encuentran datos
+            echo "<option selected>No se encontraron unidades</option>";
+        }
+        break;
 }
 ?>
