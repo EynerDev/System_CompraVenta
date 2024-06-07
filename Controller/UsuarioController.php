@@ -120,6 +120,9 @@
         case "eliminar":
             $usuario->delete_usuario($_POST["user_id"]);
             break;
+        case "password":
+           $usuario->update_contrasena($_POST["user_id"], $_POST["user_password"]);
+           break;
 
     }
 

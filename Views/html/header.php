@@ -38,6 +38,7 @@
                     <input type="hidden" name="SUC_IDx" id="SUC_IDx" value=<?php echo $_SESSION["SUC_ID"]  ?>>
                     <input type="hidden" name="COM_IDx" id="COM_IDx" value=<?php echo $_SESSION["COM_ID"]  ?>>
                     <input type="hidden" name="EMP_IDx" id="EMP_IDx" value=<?php echo $_SESSION["EMP_ID"]  ?>>
+                    <input type="hidden" name="USER_IDx" id="USER_IDx" value=<?php echo $_SESSION["USER_ID"]  ?>>
 
 
                     <div class="d-flex align-items-center">
@@ -61,14 +62,14 @@
                                         alt="Header Avatar">
                                     <span class="text-start ms-xl-2">
                                         <span class="d-none d-xl-inline-block ms-1 fw-medium user-name-text"><?php echo $_SESSION["USER_NAME"]." ".$_SESSION["USER_APE"]?></span>
-                                        <span class="d-none d-xl-block ms-1 fs-12 text-muted user-name-sub-text">Founder</span>
+                                        <span class="d-none d-xl-block ms-1 fs-12 text-muted user-name-sub-text"><?php echo $_SESSION["ROLE_NAME"]?></span>
                                     </span>
                                 </span>
                             </button>
                             <div class="dropdown-menu dropdown-menu-end">
                                 <!-- item-->
                                 <h6 class="dropdown-header">Bienvenido <?php echo $_SESSION["USER_NAME"]?>!</h6>
-                                <a class="dropdown-item" href="pages-profile.html"><i
+                                <a class="dropdown-item" href="../mntPerfil/"><i
                                         class="mdi mdi-account-circle text-muted fs-16 align-middle me-1"></i> <span
                                         class="align-middle">Profile</span></a>
 

@@ -74,6 +74,15 @@
             
             
         }
+        public function update_contrasena($user_id, $user_password){
+            $conectar = parent::conexion();
+            $sql = "SP_U_USUARIO_02 ?,?";
+            $sql_query=$conectar->prepare($sql);
+            $sql_query->bindValue(1, $user_id);
+            $sql_query->bindValue(2, $user_password);
+            $sql_query->execute();
+
+        }
 
         //TODO: Acceso al sistema
         public function Login(){
@@ -100,7 +109,7 @@
                 $sql_query->bindValue(2, $correo);
                 $sql_query->bindValue(3, $password);
                 $sql_query->execute();
-                $resultado = $sql_query->fetch();
+                $resultado = $sql_query->fetch(PDO::FETCH_ASSOC);
         
                 if(is_array($resultado) && count($resultado) > 0){
                     session_start(); // Asegúrate de que la sesión esté iniciada
@@ -110,10 +119,9 @@
                     $_SESSION["USER_APE"] = $resultado["USER_APE"];
                     $_SESSION["USER_EMAIL"] = $resultado["USER_EMAIL"];
                     $_SESSION["USER_ROLE_ID"] = $resultado["USER_ROLE_ID"];
+                    $_SESSION["ROLE_NAME"] = $resultado["ROLE_NAME"];
                     $_SESSION["COM_ID"] = $resultado["COM_ID"];
                     $_SESSION["EMP_ID"] = $resultado["EMP_ID"];
-                    
-
                     
                     header("Location:".conectar::baseUrl()."Views/home/");
                     exit();
