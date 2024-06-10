@@ -101,10 +101,13 @@
                 foreach($datos as $row){
                     $output["PROD_ID"] = $row["PROD_ID"];
                     $output["CAT_ID"] = $row["CAT_ID"];
+                    $output["CAT_NAME"] = $row["CAT_NAME"];
                     $output["PROD_NAME"] = $row["PROD_NAME"];
                     $output["PROD_DESCRIP"] = $row["PROD_DESCRIP"];
                     $output["UNID_ID"] = $row["UNID_ID"];
+                    $output["UNID_NAME"] = $row["UNID_NAME"];
                     $output["MON_ID"] = $row["MON_ID"];
+                    $output["MON_NAME"] = $row["MON_NAME"];
                     $output["PROD_PCOMPRA"] = $row["PROD_PCOMPRA"];
                     $output["PROD_PVENTA"] = $row["PROD_PVENTA"];
                     $output["PROD_STOCK"] = $row["PROD_STOCK"];
@@ -116,7 +119,20 @@
         case "eliminar":
             $producto->delete_producto($_POST["prod_id"]);
             break;
-
+        case "combo":
+            // Obtener los datos de la empresa
+            $datos = $producto->get_producto_cat_id($_POST["cat_id"]);   
+            if (is_array($datos) && count($datos) > 0) {
+                $html = "<option selected>Seleccionar Producto</option>";
+                foreach ($datos as $row) {
+                    $html .= "<option value='" . $row["PROD_ID"] . "'>" . $row["PROD_NAME"] . "</option>";
+                }
+                echo $html;
+            } else {
+                // Manejar el caso donde no se encuentran datos
+                echo "<option selected>No se encontraron categorias</option>";
+            }
+            break;
     }
 
 

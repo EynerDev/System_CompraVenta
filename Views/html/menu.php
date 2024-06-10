@@ -74,7 +74,39 @@ $datos = $menu->get_menu_role_id($_SESSION["USER_ROLE_ID"]);
                         
                         ?>
                         <li class="menu-title"><span data-key="t-menu">Compra</span></li>
+                        <?php
+                            foreach($datos as $row){
+                                if ($row["MEND_GROUP"]=="Compra" &&  $row["MEND_PERMISO"]=="SI"){
+                                    ?>
+                                        <li class="nav-item">
+                                            <a class="nav-link menu-link" href="<?php echo $row["MEN_RUTA"]?>" role="button" aria-expanded="false" aria-controls="sidebarDashboards">
+                                                <i class="<?php echo $row["ICON"]?>"></i> <span data-key="t-dashboards"><?php echo $row["MEN_NAME"]?></span>
+                                            </a>
+                                        </li>
+
+                                    <?php
+
+                                }
+                            }
+                        
+                        ?>
                         <li class="menu-title"><span data-key="t-menu">Venta</span></li>
+                        <?php
+                            foreach($datos as $row){
+                                if ($row["MEND_GROUP"]=="Venta" &&  $row["MEND_PERMISO"]=="SI"){
+                                    ?>
+                                        <li class="nav-item">
+                                            <a class="nav-link menu-link" href="<?php echo $row["MEN_RUTA"]?>" role="button" aria-expanded="false" aria-controls="sidebarDashboards">
+                                                <i class="<?php echo $row["ICON"]?>"></i> <span data-key="t-dashboards"><?php echo $row["MEN_NAME"]?></span>
+                                            </a>
+                                        </li>
+
+                                    <?php
+
+                                }
+                            }
+                        
+                        ?>
                     </ul>
                 </div>
                 <!-- Sidebar -->

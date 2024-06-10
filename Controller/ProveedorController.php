@@ -90,7 +90,20 @@
             $proveedor->delete_proveedor($_POST["prov_id"]);
             
             break;
-
+        case "combo":
+            // Obtener los datos de la empresa
+            $datos = $proveedor->get_proveedor_empresa_id($_POST["emp_id"]);   
+            if (is_array($datos) && count($datos) > 0) {
+                $html = "<option selected>Seleccionar proveedor</option>";
+                foreach ($datos as $row) {
+                    $html .= "<option value='" . $row["PROV_ID"] . "'>" . $row["PROV_NAME"] . "</option>";
+                }
+                echo $html;
+            } else {
+                // Manejar el caso donde no se encuentran datos
+                echo "<option selected>No se encontraron categorias</option>";
+            }
+            break;
     }
 
 

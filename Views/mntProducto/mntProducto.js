@@ -128,11 +128,11 @@ function editar(prod_id){
     $.post("../../Controller/ProductoController.php?op=mostrar",{prod_id:prod_id}, function(data){
         data=JSON.parse(data);
         $("#prod_id").val(data.PROD_ID)
-        $("#cat_id").val(data.CAT_ID)
+        $("#cat_id").val(data.CAT_NAME)
         $("#prod_name").val(data.PROD_NAME)
         $("#prod_descrip").val(data.PROD_DESCRIP)
-        $("#unid_id").val(data.UNID_ID)
-        $("#mon_id").val(data.MON_ID)
+        $("#unid_id").val(data.UNID_NAME)
+        $("#mon_id").val(data.MON_NAME)
         $("#prod_pventa").val(data.PROD_PVENTA)
         $("#prod_pcompra").val(data.PROD_PCOMPRA)
         $("#prod_stock").val(data.PROD_STOCK)

@@ -650,7 +650,7 @@
                         </div>
                     </div>
 
-                    <div id="sidebar-img">
+                    <!-- <div id="sidebar-img">
                         <h6 class="mt-4 mb-0 fw-semibold text-uppercase">Sidebar Images</h6>
                         <p class="text-muted">Choose a image of Sidebar.</p>
 
@@ -690,7 +690,7 @@
                                 </label>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
 
                 </div>
             </div>

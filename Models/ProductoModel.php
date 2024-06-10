@@ -20,6 +20,15 @@
             return $sql_query->fetchAll(PDO::FETCH_ASSOC);
             
         }
+        public function get_producto_cat_id($cat_id){
+            $conectar = parent::conexion();
+            $sql = "SP_L_PRODUCTO_03 ?";
+            $sql_query=$conectar->prepare($sql);
+            $sql_query->bindValue(1, $cat_id);
+            $sql_query->execute();
+            return $sql_query->fetchAll(PDO::FETCH_ASSOC);
+            
+        }
         // TODO: Eliminar registros
         public function delete_producto($prod_id){
             $conectar = parent::conexion();
