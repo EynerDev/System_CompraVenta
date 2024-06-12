@@ -94,7 +94,7 @@
             // Obtener los datos de la empresa
             $datos = $proveedor->get_proveedor_empresa_id($_POST["emp_id"]);   
             if (is_array($datos) && count($datos) > 0) {
-                $html = "<option selected>Seleccionar proveedor</option>";
+                $html = "<option selected value=''>Seleccionar proveedor</option>";
                 foreach ($datos as $row) {
                     $html .= "<option value='" . $row["PROV_ID"] . "'>" . $row["PROV_NAME"] . "</option>";
                 }

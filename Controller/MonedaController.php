@@ -83,7 +83,7 @@ switch($_GET["op"]){
             // Obtener los datos de la empresa
             $datos = $moneda->get_moneda_sucursal_id($_POST["suc_id"]);   
             if (is_array($datos) && count($datos) > 0) {
-                $html = "<option selected>Seleccionar Moneda</option>";
+                $html = "<option selected value =''>Seleccionar Moneda</option>";
                 foreach ($datos as $row) {
                     $html .= "<option value='" . $row["MON_ID"] . "'>" . $row["MON_NAME"] . "</option>";
                 }

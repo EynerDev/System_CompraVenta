@@ -84,7 +84,7 @@ switch($_GET["op"]){
         // Obtener los datos de la empresa
         $datos = $categoria->get_categoria_suc_id($_POST["suc_id"]);   
         if (is_array($datos) && count($datos) > 0) {
-            $html = "<option selected>Seleccionar Categoria</option>";
+            $html = "<option selected value=''>Seleccionar Categoria</option>";
             foreach ($datos as $row) {
                 $html .= "<option value='" . $row["CAT_ID"] . "'>" . $row["CAT_NAME"] . "</option>";
             }

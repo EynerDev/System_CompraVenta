@@ -123,7 +123,7 @@
             // Obtener los datos de la empresa
             $datos = $producto->get_producto_cat_id($_POST["cat_id"]);   
             if (is_array($datos) && count($datos) > 0) {
-                $html = "<option selected>Seleccionar Producto</option>";
+                $html = "<option selected value=''>Seleccionar Producto</option>";
                 foreach ($datos as $row) {
                     $html .= "<option value='" . $row["PROD_ID"] . "'>" . $row["PROD_NAME"] . "</option>";
                 }
