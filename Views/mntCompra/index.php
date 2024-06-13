@@ -241,6 +241,7 @@
     require_once("../html/js.php")
     ?>
     
+    
     <script type="text/javascript" src="mntCompra.js"></script>
     
 </body>

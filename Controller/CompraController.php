@@ -132,5 +132,35 @@ switch($_GET["op"]){
             echo json_encode($datos);
         }
         break; 
+    case "listar_compra":
+        $datos = $compra->get_list_compra($_POST["suc_id"]);
+        $data  = array();
+        if(is_array($datos) == TRUE and count($datos) > 0){
+            foreach($datos as $row){
+                $sub_array = array();
+                $sub_array[]= "C-".$row["COMPRA_ID"];
+                $sub_array[]= $row["PROV_NAME"];
+                $sub_array[]= $row["PROV_RUT"];
+                $sub_array[]= $row["PAGO_NAME"];
+                $sub_array[]= $row["MON_NAME"];
+                $sub_array[]= $row["COMPRA_SUB_TOTAL"];
+                $sub_array[]= $row["COMPRA_IVA"];
+                $sub_array[]= $row["COMPRA_TOTAL"];
+                $sub_array[]= $row["USER_NAME"]." ".$row["USER_APE"];
+                $sub_array[] = '<button type="button" onClick="redirigirAVistaCompra('.$row["COMPRA_ID"].')" id="'.$row["COMPRA_ID"].'" class="btn btn-secondary btn-label waves-effect waves-light"><i class="ri-file-line label-icon align-middle fs-16 me-2"></i> VER PDF</button>';
+                $sub_array[] = '<button type="button" onClick="eliminar('.$row["COMPRA_ID"].')" id="'.$row["COMPRA_ID"].'" class="btn btn-danger btn-label waves-effect waves-light"><i class="ri-delete-bin-5-line label-icon align-middle fs-16 me-2"></i> Eliminar</button>'; 
+                $sub_array[] = '<button type="button" onClick="verDetalle('.$row["COMPRA_ID"].')" id="'.$row["COMPRA_ID"].'" class="btn btn-success btn-label waves-effect waves-light"><i class="ri-eye-line label-icon align-middle fs-16 me-2"></i> Ver detalle</button>'; 
+                $data[] = $sub_array;
+    
+            }
+        }
+        $results = array(
+                "sEcho" => 1,
+                "iTotalRecords" => count($data),
+                "iTotalDisplayRecords" => count($data),
+                "aaData" => $data
+            );
+            echo json_encode($results);
+        break;
 }   
 ?>

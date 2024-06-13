@@ -8,7 +8,7 @@
 
 <head>
 
-    <title>EynerDev | Categoria</title>
+    <title>EynerDev | Listado de compra</title>
     <?php
     require_once("../html/head.php")    
 
@@ -42,7 +42,7 @@
                                 <div class="page-title-right">
                                     <ol class="breadcrumb m-0">
                                         <li class="breadcrumb-item"><a href="">Mantenimiento</a></li>
-                                        <li class="breadcrumb-item active">Categoria</li>
+                                        <li class="breadcrumb-item active">Listado de compra</li>
                                     </ol>
                                 </div>
                                 
@@ -60,8 +60,16 @@
                                             <table id="table_datos" name="table_datos" class="table table-bordered dt-responsive nowrap table-striped align-middle" style="width:100%">
                                                 <thead>
                                                     <tr>
-                                                        <th>Nombre</th>
-                                                        <th>Fecha de Creación</th>
+                                                        <th>#</th>
+                                                        <th>Proveedor</th>
+                                                        <th>RUT</th>
+                                                        <th>Pago</th>
+                                                        <th>Moneda</th>
+                                                        <th>SubTotal</th>
+                                                        <th>IVA</th>
+                                                        <th>Total</th>
+                                                        <th>Usuario</th>
+                                                        <th></th>
                                                         <th></th>
                                                         <th></th>
                                                     </tr>
@@ -98,16 +106,14 @@
     <?php
     require_once("../html/butonTheme.php")
     ?>
-
     <?php
-    require_once("ModalCategoria.php")
+    require_once("listModal.php")
     ?>
-
     <?php
     require_once("../html/js.php")
     ?>
     
-    <script type="text/javascript" src="mntCategoria.js"></script>
+    <script type="text/javascript" src="listCompra.js"></script>
     
 </body>
 
