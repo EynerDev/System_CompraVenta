@@ -57,7 +57,6 @@ $(document).ready(function() { // Puedes obtener este valor dinámicamente segú
             type: "post",
             data: { com_id : com_id},
             dataSrc: function(json) {
-                console.log("Response from server:", json); // Depurar la respuesta del servidor
                 if (!json.aaData) {
                     console.error("Invalid JSON response:", json);
                     return [];
@@ -123,7 +122,6 @@ function eliminar(emp_id){
     }).then((result => {
         if (result.value){
             $.post("../../Controller/EmpresaController.php?op=eliminar",{emp_id:emp_id}, function(data){
-              console.log(data)
             })
            
             $("#table_datos").DataTable().ajax.reload();

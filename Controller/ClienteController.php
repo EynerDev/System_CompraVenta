@@ -78,6 +78,7 @@
                     $output["CLI_ID"] = $row["CLI_ID"];
                     $output["EMP_ID"] = $row["EMP_ID"];
                     $output["CLI_NAME"] = $row["CLI_NAME"];
+                    $output["DESCRIPTION"] = $row["DESCRIPTION"];
                     $output["TIPO_DOC_ID"] = $row["TIPO_DOC_ID"];
                     $output["CLI_DOC"] = $row["CLI_DOC"];
                     $output["CLI_NUMBER"] = $row["CLI_NUMBER"];
@@ -92,7 +93,20 @@
             $cliente->delete_cliente($_POST["cli_id"]);
             
             break;
-
+        case "combo":
+            // Obtener los datos de la empresa
+            $datos = $cliente->get_cliente_empresa_id($_POST["emp_id"]);   
+            if (is_array($datos) && count($datos) > 0) {
+                $html = "<option selected value=''>Seleccionar Cliente</option>";
+                foreach ($datos as $row) {
+                    $html .= "<option value='" . $row["CLI_ID"] . "'>" . $row["CLI_NAME"] . "</option>";
+                }
+                echo $html;
+            } else {
+                // Manejar el caso donde no se encuentran datos
+                echo "<option selected>No se encontraron categorias</option>";
+            }
+            break;
     }
 
 

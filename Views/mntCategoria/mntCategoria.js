@@ -55,7 +55,6 @@ $(document).ready(function() {
             type: "post",
             data: { suc_id : suc_id},
             dataSrc: function(json) {
-                console.log("Response from server:", json); // Depurar la respuesta del servidor
                 if (!json.aaData) {
                     console.error("Invalid JSON response:", json);
                     return [];

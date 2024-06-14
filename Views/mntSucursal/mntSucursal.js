@@ -58,7 +58,6 @@ $(document).ready(function() {
             type: "post",
             data: { emp_id : emp_id},
             dataSrc: function(json) {
-                console.log("Response from server:", json); // Depurar la respuesta del servidor
                 if (!json.aaData) {
                     console.error("Invalid JSON response:", json);
                     return [];

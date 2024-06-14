@@ -11,7 +11,7 @@ $(document).ready(function() {
             'csvHtml5',
         ],
         "ajax": {
-            url: "../../Controller/CompraController.php?op=listar_compra",
+            url: "../../Controller/VentaController.php?op=listar_venta",
             type: "post",
             data: { suc_id : suc_id},
             dataSrc: function(json) {
@@ -54,18 +54,18 @@ $(document).ready(function() {
     });
 });
 
-function redirigirAVistaCompra(compra_id) {
+function redirigirAVistaVenta(venta_id) {
     
-    let url = `../viewCompra/?c=${compra_id}`;
+    let url = `../viewVenta/?c=${venta_id}`;
     window.open(url, '_blank');
 }
 
 $(document).on("click","#btn_nuevo",function(){
-    window.open("../mntCompra/")
+    window.open("../mntVenta/")
 
 });
 
-function verDetalle(compra_id){
+function verDetalle(venta_id){
 
 
     $('#detalle_data').DataTable({
@@ -78,11 +78,11 @@ function verDetalle(compra_id){
             'csvHtml5',
         ],
         "ajax": {
-            url: "../../Controller/CompraController.php?op=listar_detalle",
+            url: "../../Controller/VentaController.php?op=listar_detalle",
             type: "post",
-            data: { compra_id : compra_id},
+            data: { venta_id : venta_id},
             dataSrc: function(json) {
-                console.log("Response from server:", json); // Depurar la respuesta del servidor
+                ("Response from server:", json); // Depurar la respuesta del servidor
                 if (!json.aaData) {
                     console.error("Invalid JSON response:", json);
                     return [];
@@ -122,20 +122,20 @@ function verDetalle(compra_id){
 
         
     });
-    calculo_detalle(compra_id)
+    calculo_detalle(venta_id)
     $("#ListModal").modal("show")
     
     
 }
 
-function calculo_detalle(compra_id){
-    $.post("../../Controller/CompraController.php?op=calculo",{
-        compra_id: compra_id, })
+function calculo_detalle(venta_id){
+    $.post("../../Controller/VentaController.php?op=calculo",{
+        venta_id: venta_id, })
         .done(function(data){
             data = JSON.parse(data)
-            $('#compra_sub_total').html(data.SUBTOTAL)
-            $("#compra_iva").html(data.IVA)
-            $("#compra_total").html(data.TOTAL)
+            $('#venta_sub_total').html(data.VENTA_SUB_TOTAL)
+            $("#venta_iva").html(data.VENTA_IVA)
+            $("#venta_total").html(data.VENTA_TOTAL)
         })
         .fail(function(error) {
             console.error("Error en la solicitud:", error);

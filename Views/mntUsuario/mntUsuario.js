@@ -21,7 +21,6 @@ function guardaryeditar(e) {
             // Intenta analizar la respuesta como JSON
                 if (response) {
                     data = JSON.parse(response)
-                    console.log(data)
                     // La respuesta indica éxito
                     $('#table_datos').DataTable().ajax.reload();
                     $('#ModalUsuario').modal('hide');
@@ -98,7 +97,6 @@ function eliminar(user_id){
     }).then((result => {
         if (result.value){
             $.post("../../Controller/UsuarioController.php?op=eliminar",{user_id:user_id}, function(data){
-              console.log(data)
             })
            
             $("#table_datos").DataTable().ajax.reload();
@@ -130,7 +128,6 @@ function init_table(){
             type: "post",
             data: { suc_id : suc_id},
             dataSrc: function(json) {
-                console.log("Response from server:", json); // Depurar la respuesta del servidor
                 if (!json.aaData) {
                     console.error("Invalid JSON response:", json);
                     return [];

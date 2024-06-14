@@ -56,7 +56,6 @@ $(document).ready(function() {
             type: "post",
             data: { suc_id : suc_id},
             dataSrc: function(json) {
-                console.log("Response from server:", json); // Depurar la respuesta del servidor
                 if (!json.aaData) {
                     console.error("Invalid JSON response:", json);
                     return [];
@@ -122,7 +121,6 @@ function eliminar(uni_id){
     }).then((result => {
         if (result.value){
             $.post("../../Controller/UnidadController.php?op=eliminar",{uni_id:uni_id}, function(data){
-              console.log(data)
             })
            
             $("#table_datos").DataTable().ajax.reload();

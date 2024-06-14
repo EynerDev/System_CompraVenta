@@ -71,6 +71,7 @@ switch($_GET["op"]){
             $_POST["prov_number"],
             $_POST["prov_coment"]
         );
+        $compra->update_stock_compra($_POST["compra_id"]);
         break;
     case "listar_pdf":
 

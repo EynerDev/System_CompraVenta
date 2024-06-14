@@ -21,7 +21,6 @@ function guardaryeditar(e) {
             // Intenta analizar la respuesta como JSON
                 if (response) {
                     data = JSON.parse(response)
-                    console.log(data)
                     // La respuesta indica éxito
                     $('#table_datos').DataTable().ajax.reload();
                     $('#ModalProveedor').modal('hide');
@@ -59,7 +58,6 @@ $(document).ready(function() {
             type: "post",
             data: { emp_id : emp_id},
             dataSrc: function(json) {
-                console.log("Response from server:", json); // Depurar la respuesta del servidor
                 if (!json.aaData) {
                     console.error("Invalid JSON response:", json);
                     return [];
@@ -129,7 +127,6 @@ function eliminar(prov_id){
     }).then((result => {
         if (result.value){
             $.post("../../Controller/ProveedorController.php?op=eliminar",{prov_id:prov_id}, function(data){
-              console.log(data)
             })
            
             $("#table_datos").DataTable().ajax.reload();

@@ -73,23 +73,30 @@
             $sql_query->execute();
         }
         public function get_compra_pdf($compra_id){
-        $conectar = parent::conexion();
-        $sql = "SP_l_COMPRA_PDF_01 ?";
-        $sql_query=$conectar->prepare($sql);
-        $sql_query->bindValue(1, $compra_id);
-        $sql_query->execute();
-        return $sql_query->fetchAll(PDO::FETCH_ASSOC);     
+            $conectar = parent::conexion();
+            $sql = "SP_l_COMPRA_PDF_01 ?";
+            $sql_query=$conectar->prepare($sql);
+            $sql_query->bindValue(1, $compra_id);
+            $sql_query->execute();
+            return $sql_query->fetchAll(PDO::FETCH_ASSOC);     
 
-    }
-    public function get_list_compra($suc_id){
-        $conectar = parent::conexion();
-        $sql = "SP_L_COMPRA_04 ?";
-        $sql_query=$conectar->prepare($sql);
-        $sql_query->bindValue(1, $suc_id);
-        $sql_query->execute();
-        return $sql_query->fetchAll(PDO::FETCH_ASSOC); 
-    
-    }
+        }
+        public function get_list_compra($suc_id){
+            $conectar = parent::conexion();
+            $sql = "SP_L_COMPRA_04 ?";
+            $sql_query=$conectar->prepare($sql);
+            $sql_query->bindValue(1, $suc_id);
+            $sql_query->execute();
+            return $sql_query->fetchAll(PDO::FETCH_ASSOC); 
+        
+        }
+        public function update_stock_compra($compra_id){
+            $conectar = parent::conexion();
+            $sql = "SP_U_STOCK_COMPRA_01 ?";
+            $sql_query=$conectar->prepare($sql);
+            $sql_query->bindValue(1, $compra_id);
+            $sql_query->execute();
+        }
 }
 
 ?>

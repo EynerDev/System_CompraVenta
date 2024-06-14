@@ -3,19 +3,16 @@ let suc_id = $('#SUC_IDx').val()
 let user_id = $('#USER_IDx').val()
 $(document).ready(function() {
 
-    $('#prov_id, #cat_id, #prod_id, #pago_id, #mon_id').select2();
+    $('#cat_id, #prod_id, #pago_id, #mon_id').select2();
+    $('#cli_id').select2()
 
 
-    $.post("../../Controller/CompraController.php?op=registrar",{suc_id:suc_id, user_id:user_id})
+    $.post("../../Controller/VentaController.php?op=registrar",{suc_id:suc_id, user_id:user_id})
     .done(function(data) {
         data = JSON.parse(data)
-        $('#compra_id').val(data.COMPRA_ID)
+        $('#venta_id').val(data.VENTA_ID)
         
     })
-    .fail(function(error) {
-        console.error("Error en la solicitud:", error);
-    });
-    
 
     $.post("../../Controller/MonedaController.php?op=combo",{suc_id:suc_id})
     .done(function(data) {
@@ -26,9 +23,9 @@ $(document).ready(function() {
     });
 
     
-    $.post("../../Controller/ProveedorController.php?op=combo",{emp_id:emp_id})
+    $.post("../../Controller/ClienteController.php?op=combo",{emp_id:emp_id})
     .done(function(data) {
-        $("#prov_id").html(data);
+        $("#cli_id").html(data);
 
     })
     .fail(function(error) {
@@ -58,17 +55,18 @@ $(document).ready(function() {
 
 
     // Añade un listener de evento change al elemento #emp_id
-    $("#prov_id").change(function() {
-        prov_id = $(this).val();
-        // Realiza una solicitud AJAX POST a ProveedorController.php con el prov_id seleccionado
-        $.post("../../Controller/ProveedorController.php?op=mostrar", { prov_id: prov_id })
+    $("#cli_id").change(function() {
+        cli_id = $(this).val();
+        // Realiza una solicitud AJAX POST a ClienteController.php con el prov_id seleccionado
+        $.post("../../Controller/ClienteController.php?op=mostrar", { cli_id: cli_id })
             .done(function(data) {
-                console.log("Datos recibidos:", data);
                 data = JSON.parse(data)
-                $('#prov_rut').val(data.PROV_RUT)
-                $('#prov_direcc').val(data.PROV_DIRC)
-                $('#prov_email').val(data.PROV_EMAIL)
-                $('#prov_number').val(data.PROV_NUMBER)
+                $('#cli_tipo_doc_id').val(data.TIPO_DOC_ID)
+                $('#cli_tipo_doc_name').val(data.DESCRIPTION)
+                $('#cli_doc').val(data.CLI_DOC)
+                $('#cli_direcc').val(data.CLI_DIRECC)
+                $('#cli_email').val(data.CLI_EMAIL)
+                $('#cli_number').val(data.CLI_NUMBER)
             })
             .fail(function(error) {
                 console.error("Error en la solicitud:", error);
@@ -78,7 +76,7 @@ $(document).ready(function() {
     
     $("#cat_id").change(function() {
         cat_id = $(this).val();
-        // Realiza una solicitud AJAX POST a ProveedorController.php con el prov_id seleccionado
+        // Realiza una solicitud AJAX POST a ClienteController.php con el prov_id seleccionado
         $.post("../../Controller/ProductoController.php?op=combo", { cat_id: cat_id })
             .done(function(data) {
                 $("#prod_id").html(data)
@@ -95,13 +93,13 @@ $(document).ready(function() {
         $.post("../../Controller/ProductoController.php?op=mostrar", { prod_id:prod_id })
                 .done(function(data){
                     data = JSON.parse(data)
-                    $('#prod_pcompra').val(data.PROD_PCOMPRA)
+                    $('#prod_pventa').val(data.PROD_PVENTA)
                     $("#unid_medida").val(data.UNID_NAME)
                 })
 
     })
 });
-function eliminar(det_id,compra_id){
+function eliminar(det_venta_id,venta_id){
     swal.fire({
         title: "Eliminar",
         text: "¿Estás seguro de eliminar este registro?",
@@ -114,23 +112,21 @@ function eliminar(det_id,compra_id){
 
     }).then((result => {
         if (result.value){
-            $.post("../../Controller/CompraController.php?op=eliminar",{det_id:det_id}, function(data){
-              console.log(data)
-              
+            $.post("../../Controller/VentaController.php?op=eliminar",{det_venta_id:det_venta_id}, function(){              
             })
-            calculo_detalle(compra_id)
-        
+            
             swal.fire({
-                title : "Compra y Venta",
+                title : "Venta y Venta",
                 text : "Registro Eliminado",
                 icon : "success",
             })
+            calculo_detalle(venta_id)
             $("#table_datos").DataTable().ajax.reload();
         }
 
     }));
 }
-function init_table(compra_id){
+function init_table(venta_id){
     $('#table_datos').DataTable({
         "aProcessing": true,
         "aServerSide": true,
@@ -141,11 +137,10 @@ function init_table(compra_id){
             'csvHtml5',
         ],
         "ajax": {
-            url: "../../Controller/CompraController.php?op=listar_detalle",
+            url: "../../Controller/VentaController.php?op=listar_detalle",
             type: "post",
-            data: { compra_id : compra_id},
+            data: { venta_id : venta_id},
             dataSrc: function(json) {
-                console.log("Response from server:", json); // Depurar la respuesta del servidor
                 if (!json.aaData) {
                     console.error("Invalid JSON response:", json);
                     return [];
@@ -184,14 +179,14 @@ function init_table(compra_id){
         },
     });
 }
-function calculo_detalle(compra_id){
-    $.post("../../Controller/CompraController.php?op=calculo",{
-        compra_id: compra_id, })
+function calculo_detalle(venta_id){
+    $.post("../../Controller/VentaController.php?op=calculo",{
+        venta_id: venta_id, })
         .done(function(data){
             data = JSON.parse(data)
-            $('#compra_sub_total').html(data.SUBTOTAL)
-            $("#compra_iva").html(data.IVA)
-            $("#compra_total").html(data.TOTAL)
+            $('#venta_sub_total').html(data.VENTA_SUB_TOTAL)
+            $("#venta_iva").html(data.VENTA_IVA)
+            $("#venta_total").html(data.VENTA_TOTAL)
         })
         .fail(function(error) {
             console.error("Error en la solicitud:", error);
@@ -201,101 +196,106 @@ function isEmpty(value) {
     return value === "" || value === null || value === undefined;
 }
 $(document).on("click","#btn_agregar",function(){
-    let compra_id = $("#compra_id").val()
+
+    let venta_id = $("#venta_id").val()
     let prod_id = $("#prod_id").val()
-    let prod_pcompra = $("#prod_pcompra").val()
-    let det_cant = $("#prod_stock").val()
+    let prod_pventa = $("#prod_pventa").val()
+    let det_vent_cant = $("#prod_stock").val()
 
 // Función para verificar si un valor está vacío
-if (isEmpty(compra_id) || isEmpty(prod_id) || isEmpty(prod_pcompra) || isEmpty(det_cant)) {
+if (isEmpty(venta_id) || isEmpty(prod_id) || isEmpty(prod_pventa) || isEmpty(det_vent_cant)) {
     swal.fire({
         title: "Error",
         text: "Hay campos vacíos",
         icon: "error",
     });
 } else {
-    $.post("../../Controller/CompraController.php?op=detalle", {
-        compra_id: compra_id,
+    $.post("../../Controller/VentaController.php?op=detalle", {
+        venta_id: venta_id,
         prod_id: prod_id,
-        prod_pcompra: prod_pcompra,
-        det_cant: det_cant
+        prod_pventa: prod_pventa,
+        det_venta_cant: det_vent_cant
     })
-    .done(function() {
+    .done(function(data) {
         // Acciones a realizar en caso de éxito
-        calculo_detalle(compra_id);
-        $("#prod_pcompra").val('')
+        calculo_detalle(venta_id);
+        
+        $("#prod_pventa").val('')
         $("#prod_stock").val('')
+        init_table(venta_id)
 
-        init_table(compra_id);
-        $('#table_datos').DataTable().ajax.reload();
+        
 
     
     })
     .fail(function(error) {
         console.error("Error en la solicitud:", error);
     });
+
 }
  
     
 });
 
 $(document).on("click","#btn_guardar",function(){
-    let compra_id = $("#compra_id").val()
-    let prov_id = $("#prov_id").val()
+    let venta_id = $("#venta_id").val()
+    let cli_id = $("#cli_id").val()
     let pago_id = $("#pago_id").val()
-    let prov_rut = $("#prov_rut").val()
-    let prov_dirc = $("#prov_direcc").val()
-    let prov_email = $("#prov_email").val()
+    let cli_tipo_doc_id = $("#cli_tipo_doc_id").val()
+    let cli_doc = $("#cli_doc").val()
+    let cli_email = $("#cli_email").val()
+    let cli_number = $("#cli_number").val()
     let mon_id = $("#mon_id").val()
-    let prov_number = $("#prov_number").val()
-    let prov_coment = $("#prov_coment").val()
+    let venta_coment = $("#venta_coment").val()
+    let cli_direcc = $("#cli_direcc").val()
 
-    if (isEmpty(compra_id) || isEmpty(prov_id) || isEmpty(pago_id) || isEmpty(prov_rut) 
-        || isEmpty(prov_dirc) || isEmpty(prov_email) || isEmpty(mon_id) 
-        || isEmpty(prov_number))
+    if (isEmpty(venta_id) || isEmpty(pago_id) || isEmpty(cli_id) || isEmpty(cli_tipo_doc_id) 
+        || isEmpty(cli_doc) || isEmpty(cli_email) || isEmpty(cli_number) 
+        || isEmpty(cli_direcc) || isEmpty(mon_id) )
         {
             swal.fire({
                 title: "Error",
-                text: "Hay campos vacios",
+                text: "Hay campos vacios" ,
                 icon: "error",
             });
     } else {
-        $.post("../../Controller/CompraController.php?op=calculo",{
-            compra_id: compra_id, })
+        $.post("../../Controller/VentaController.php?op=calculo",{venta_id: venta_id})
         .done(function(data){
-            data = JSON.parse(data)
-            if (isEmpty(data.TOTAL)){
+            datos = JSON.parse(data)
+            if (isEmpty(datos.VENTA_TOTAL)){
                 swal.fire({
-                    title: "Compra",
+                    title: "Venta",
                     text: "No existen detalles",
                     icon: "error",
                 });
 
             }else{
-                $.post("../../Controller/CompraController.php?op=guardar", {
-                    compra_id: compra_id,
+                $.post("../../Controller/VentaController.php?op=guardar",{
+                    venta_id: venta_id,
                     pago_id: pago_id,
-                    prov_id: prov_id,
-                    prov_rut: prov_rut,
-                    prov_dirc: prov_dirc,
-                    prov_email: prov_email,
+                    cli_id: cli_id,
+                    cli_tipo_doc_id: cli_tipo_doc_id,
+                    cli_doc: cli_doc,
+                    cli_direcc: cli_direcc,
+                    cli_email: cli_email,
+                    cli_number: cli_number,
                     mon_id: mon_id,
-                    prov_number: prov_number,
-                    prov_coment: prov_coment,
+                    venta_coment: venta_coment,
+                    
                 })
                 .done(function() {
             
                     swal.fire({
-                        title: "Compra",
-                        text: "Compra registrada exitosamente N°: C-" + compra_id,
+                        title: "Venta",
+                        text: "Venta registrada exitosamente N°: V-" + venta_id,
                         icon: "success",
                         showCancelButton: true,
                         confirmButtonText: 'Ver PDF',
                         cancelButtonText: 'OK',
                     }).then((result) => {
                         if (result.value) { 
-                            // Abre la vista de la compra en una nueva ventana si se hace clic en 'Ver PDF'
-                            redirigirAVistaCompra(compra_id);
+                            // Abre la vista de la venta en una nueva ventana si se hace clic en 'Ver PDF'
+                            redirigirAVistaVenta(venta_id);
                         } else {
                             // No haces nada o realizas alguna otra acción si se presiona 'Cancelar' o 'OK'
                         }
@@ -321,9 +321,9 @@ $(document).on("click","#btn_guardar",function(){
 
 })
 
-function redirigirAVistaCompra(compra_id) {
+function redirigirAVistaVenta(venta_id) {
     
-    let url = `../viewCompra/?c=${compra_id}`;
+    let url = `../viewVenta/?c=${venta_id}`;
     window.open(url, '_blank');
 }
 

@@ -75,7 +75,7 @@
                 $sub_array[] = $row["PROD_NAME"];
                 $sub_array[] = $row["UNID_NAME"];
                 $sub_array[] = $row["MON_NAME"];
-                $sub_array[] = $row["PROD_PVENTA"];
+                $sub_array[] = $row["PROD_PCOMPRA"];
                 $sub_array[] = $row["PROD_PVENTA"];
                 $sub_array[] = $row["PROD_STOCK"];
                 $sub_array[] = $row["CREATED_AT"];

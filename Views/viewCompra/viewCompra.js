@@ -3,7 +3,6 @@ $(document).ready(function() {
     let compra_id = getUrlParameter('c')
     $.post("../../Controller/CompraController.php?op=listar_pdf", {compra_id: compra_id,})
     .done(function(data) {
-        console.log(data)
         let datos = JSON.parse(data)
         $('#txt_dirc').html(datos.EMP_DIRC)
         $("#txt_rut").html(datos.EMP_RUT)
@@ -31,7 +30,6 @@ $(document).ready(function() {
     })
     $.post("../../Controller/CompraController.php?op=listar_detalle_pdf", {compra_id: compra_id,})
     .done(function(data) {
-        console.log(data)
         $("#list_detalles").html(data)
         
         

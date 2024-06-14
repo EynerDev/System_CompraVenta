@@ -55,7 +55,6 @@ $(document).ready(function() {
             type: "post",
             data: { suc_id : suc_id},
             dataSrc: function(json) {
-                console.log("Response from server:", json); // Depurar la respuesta del servidor
                 if (!json.aaData) {
                     console.error("Invalid JSON response:", json);
                     return [];
@@ -122,7 +121,6 @@ function eliminar(role_id){
     }).then((result => {
         if (result.value){
             $.post("../../Controller/RolController.php?op=eliminar",{role_id:role_id}, function(data){
-              console.log(data)
             })
            
             $("#table_datos").DataTable().ajax.reload();
@@ -154,7 +152,6 @@ function permisos(role_id){
             type: "post",
             data: { role_id : role_id},
             dataSrc: function(json) {
-                console.log("Response from server:", json); // Depurar la respuesta del servidor
                 if (!json.aaData) {
                     console.error("Invalid JSON response:", json);
                     return [];

@@ -21,7 +21,6 @@ function guardaryeditar(e) {
             // Intenta analizar la respuesta como JSON
                 if (response) {
                     data = JSON.parse(response)
-                    console.log(data)
                     // La respuesta indica éxito
                     $('#table_datos').DataTable().ajax.reload();
                     $('#ModalProducto').modal('hide');
@@ -70,6 +69,10 @@ $(document).ready(function() {
         console.error("Error en la solicitud:", error);
     });
 
+table_init(suc_id)
+});
+function table_init(suc_id){
+
     $('#table_datos').DataTable({
         "aProcessing": true,
         "aServerSide": true,
@@ -84,7 +87,6 @@ $(document).ready(function() {
             type: "post",
             data: { suc_id : suc_id},
             dataSrc: function(json) {
-                console.log("Response from server:", json); // Depurar la respuesta del servidor
                 if (!json.aaData) {
                     console.error("Invalid JSON response:", json);
                     return [];
@@ -122,7 +124,7 @@ $(document).ready(function() {
             }
         },
     });
-});
+}
 
 function editar(prod_id){
     $.post("../../Controller/ProductoController.php?op=mostrar",{prod_id:prod_id}, function(data){
@@ -157,7 +159,6 @@ function eliminar(prod_id){
     }).then((result => {
         if (result.value){
             $.post("../../Controller/ProductoController.php?op=eliminar",{prod_id:prod_id}, function(data){
-              console.log(data)
             })
            
             $("#table_datos").DataTable().ajax.reload();
