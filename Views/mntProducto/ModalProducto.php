@@ -3,12 +3,35 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="lblTitle"></h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form method="post" id="mantenimiento_form">
                     <div class="row g-3">
+                                <div class="card-body p-4">
+                                    <div class="text-center">
+                                        <div class="profile-user position-relative d-inline-block mx-auto mb-4">
+                                            <span id="prod_img_preview"></span>
+                                            <div class="avatar-xs p-0 rounded-circle profile-photo-edit position-absolute bottom-0 end-0">
+                                                <input id="prod_img" type="file" class="profile-img-file-input d-none">
+                                                <label for="prod_img" class="profile-photo-edit avatar-xs m-1">
+                                                    <span class="avatar-title rounded-circle bg-light text-body">
+                                                        <i class="ri-camera-fill"></i>
+                                                    </span>
+                                                </label>
+                                            </div>
+                                            
+                                            <div class="avatar-xs p-0 rounded-circle profile-photo-edit position-absolute bottom-0 start-0">
+                                                <button id="remove-img-btn" class="profile-photo-edit rounded-circle avatar-xs m-1 btn btn-light">
+                                                    <span class="avatar-title rounded-circle bg-light text-body">
+                                                        <i class="ri-delete-bin-fill"></i>
+                                                    </span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <h5 class="fs-16 mb-1" id="lblTitle"></h5>
+                                    </div>
+                                </div>
 
                         <input type="hidden" name="prod_id" id="prod_id">
                         
@@ -23,7 +46,7 @@
                                 <input type="text" class="form-control" id="prod_name" name="prod_name" required placeholder="Nombre del producto">
                             </div>
                         </div><!--end col-->
-                        <div class="col-xxl-3 col-md-6">
+                        <div class="col-xxl-6">
                             <div>
                                 <label for="exampleFormControlTextarea5" class="form-label">Descripción</label>
                                 <textarea class="form-control" id="prod_descrip" name="prod_descrip" rows="3"></textarea>

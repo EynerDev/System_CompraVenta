@@ -177,16 +177,42 @@ function eliminar(prod_id){
 }
 
 
-$(document).on("click","#btn_nuevo",function(){
+$(document).on("click", "#btn_nuevo", function() {
     $('#prod_id').val('');
     $('#prod_name').val('');
     $('#prod_rut').val('');
     $('#prod_number').val('');
     $('#prod_dirc').val('');
     $('#prod_email').val('');
+    $("#prod_img_preview").html(
+        '<img src="../../assets/productos/error_404.jpeg" class="rounded-circle avatar-xl img-thumbnail user-profile-image" alt="user-profile-image">');
     $('#lblTitle').html('Nuevo Registro');
     $("#mantenimiento_form")[0].reset();
     $('#ModalProducto').modal('show');
 });
+
+function filePreview(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            $('#prod_img_preview').html(
+                '<img src="' + e.target.result + '" class="rounded-circle avatar-xl img-thumbnail user-profile-image" alt="user-profile-image" />');
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+$(document).on('change', '#prod_img', function(){
+    filePreview(this);
+});
+
+
+$(document).on("click","#btnremovephoto",function(){
+    $('#prod_img').val('');
+    $('#prod_img_preview').html(
+        '<img src="../../assets/productos/error_404.jpeg" class="rounded-circle avatar-xl img-thumbnail user-profile-image" alt="user-profile-image"></img><input type="hidden" name="hidden_producto_imagen" value="" />');
+});
+
+
 
 init();

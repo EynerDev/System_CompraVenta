@@ -7,8 +7,8 @@
 
     switch($_GET["op"]){
         // TODO:Guardar y editar, guardar cuando el id en vacio y actualizar cuando id tiene un valor
-        case "guardaryeditar":
 
+        case "guardaryeditar":
             $suc_id = isset($_POST["suc_id"]) ? $_POST["suc_id"] : null;
             $cat_id = isset($_POST["cat_id"]) ? $_POST["cat_id"] : null;
             $prod_name = isset($_POST["prod_name"]) ? $_POST["prod_name"] : null;
@@ -19,29 +19,29 @@
             $prod_pventa = isset($_POST["prod_pventa"]) ? $_POST["prod_pventa"] : null;
             $prod_stock = isset($_POST["prod_stock"]) ? $_POST["prod_stock"] : null;
             $prod_fecha_en = isset($_POST["prod_fecha_en"]) ? $_POST["prod_fecha_en"] : null;
-            $prod_img = isset($_POST["prod_img"]) ? $_POST["prod_img"] : null;
             $prod_id = isset($_POST["prod_id"]) ? $_POST["prod_id"] : null;
+            $prod_img = isset($_POST["prod_img"]) ? $_POST["prod_img"] : null;
+                       
             if (empty($prod_id)){
-                $producto->insert_producto(
-                    $suc_id,
-                    $cat_id,
-                    $prod_name,
-                    $prod_descrip,
-                    $unid_id,
-                    $mon_id,
-                    $prod_pcompra,
-                    $prod_pventa,
-                    $prod_stock,
-                    $prod_fecha_en,
-                    $prod_img,
+                    $producto->insert_producto(
+                        $suc_id,
+                        $cat_id,
+                        $prod_name,
+                        $prod_descrip,
+                        $unid_id,
+                        $mon_id,
+                        $prod_pcompra,
+                        $prod_pventa,
+                        $prod_stock,
+                        $prod_fecha_en,
+                        $prod_img
                 );
                 echo json_encode([
                     'success' => true,
                     'message' => 'Producto creado exitosamente',
                     'icon' => 'success'
                 ]);
-                    
-            }else{
+            } else {
                 $producto->update_producto(
                     $prod_id,
                     $suc_id,
@@ -54,15 +54,16 @@
                     $prod_pventa,
                     $prod_stock,
                     $prod_fecha_en,
-                    $prod_img,
+                    $prod_img
                 );
                 echo json_encode([
                     'success' => true,
-                    'message' => '¨Producto actualizado exitosamente',
+                    'message' => 'Producto actualizado exitosamente',
                     'icon' => 'success'
                 ]);
             }
             break;
+            
 
             // TODO: Listado de registros formato JSON para datatable JS
         case "listar":
