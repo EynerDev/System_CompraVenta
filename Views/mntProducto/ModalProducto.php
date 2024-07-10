@@ -11,9 +11,9 @@
                                 <div class="card-body p-4">
                                     <div class="text-center">
                                         <div class="profile-user position-relative d-inline-block mx-auto mb-4">
-                                            <span id="prod_img_preview"></span>
+                                            <span id="prod_img_preview"  name="prod_img_preview"></span>
                                             <div class="avatar-xs p-0 rounded-circle profile-photo-edit position-absolute bottom-0 end-0">
-                                                <input id="prod_img" type="file" class="profile-img-file-input d-none">
+                                                <input id="prod_img" name="prod_img" type="file" class="profile-img-file-input d-none">
                                                 <label for="prod_img" class="profile-photo-edit avatar-xs m-1">
                                                     <span class="avatar-title rounded-circle bg-light text-body">
                                                         <i class="ri-camera-fill"></i>

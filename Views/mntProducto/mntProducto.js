@@ -18,15 +18,16 @@ function guardaryeditar(e) {
         contentType: false,
         processData: false,
         success: function(response) {
-            // Intenta analizar la respuesta como JSON
-                if (response) {
-                    data = JSON.parse(response)
+            try {
+                // Intenta analizar la respuesta como JSON
+                var data = JSON.parse(response);
+                if (data.success) {
                     // La respuesta indica éxito
                     $('#table_datos').DataTable().ajax.reload();
                     $('#ModalProducto').modal('hide');
                     Swal.fire({
                         title: 'Producto',
-                        text:data.message,
+                        text: data.message,
                         icon: data.icon
                     });
                 } else {
@@ -37,10 +38,28 @@ function guardaryeditar(e) {
                         icon: data.icon
                     });
                 }
-            
+            } catch (e) {
+                // Si hay un error al analizar la respuesta como JSON
+                console.error("La respuesta no es JSON válido:", response);
+                Swal.fire({
+                    title: 'Error',
+                    text: 'Hubo un problema al procesar la respuesta del servidor.',
+                    icon: 'error'
+                });
+            }
         },
+        error: function(jqXHR, textStatus, errorThrown) {
+            // Manejo de errores en la solicitud AJAX
+            console.error("Error en la solicitud AJAX:", textStatus, errorThrown);
+            Swal.fire({
+                title: 'Error',
+                text: 'Hubo un problema con la solicitud. Por favor, inténtalo de nuevo más tarde.',
+                icon: 'error'
+            });
+        }
     });
 }
+
 
 $(document).ready(function() {
     $('#cat_id').select2();
@@ -129,15 +148,18 @@ function table_init(suc_id){
 function editar(prod_id){
     $.post("../../Controller/ProductoController.php?op=mostrar",{prod_id:prod_id}, function(data){
         data=JSON.parse(data);
+        console.log(data)
         $("#prod_id").val(data.PROD_ID)
-        $("#cat_id").val(data.CAT_NAME)
         $("#prod_name").val(data.PROD_NAME)
         $("#prod_descrip").val(data.PROD_DESCRIP)
-        $("#unid_id").val(data.UNID_NAME)
-        $("#mon_id").val(data.MON_NAME)
+        $("#cat_id").val(data.CAT_ID).trigger('change');
+        $("#unid_id").val(data.UNID_ID).trigger('change');
+        $("#mon_id").val(data.MON_ID).trigger('change');
         $("#prod_pventa").val(data.PROD_PVENTA)
         $("#prod_pcompra").val(data.PROD_PCOMPRA)
         $("#prod_stock").val(data.PROD_STOCK)
+        $('#prod_img_preview').html(data.PROD_IMG)
+
     })
 
     $("#lblTitle").html("Editar Registro")
@@ -184,8 +206,11 @@ $(document).on("click", "#btn_nuevo", function() {
     $('#prod_number').val('');
     $('#prod_dirc').val('');
     $('#prod_email').val('');
+    $('#cat_id').val('').trigger('change');
+    $('#und_id').val('').trigger('change');
+    $('#mon_id').val('').trigger('change');
     $("#prod_img_preview").html(
-        '<img src="../../assets/productos/error_404.jpeg" class="rounded-circle avatar-xl img-thumbnail user-profile-image" alt="user-profile-image">');
+        '<img src="../../assets/productos/error_404.jpeg" class="rounded-circle avatar-xl img-thumbnail user-profile-image" alt="user-profile-image"></img><input type="hidden" name="hidden_producto_imagen" value="" />');
     $('#lblTitle').html('Nuevo Registro');
     $("#mantenimiento_form")[0].reset();
     $('#ModalProducto').modal('show');
@@ -212,7 +237,5 @@ $(document).on("click","#btnremovephoto",function(){
     $('#prod_img_preview').html(
         '<img src="../../assets/productos/error_404.jpeg" class="rounded-circle avatar-xl img-thumbnail user-profile-image" alt="user-profile-image"></img><input type="hidden" name="hidden_producto_imagen" value="" />');
 });
-
-
 
 init();

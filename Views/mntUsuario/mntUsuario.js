@@ -70,8 +70,8 @@ function editar(user_id){
         $("#user_id").val(data.USER_ID)
         $("#user_name").val(data.USER_NAME)
         $("#user_ape").val(data.USER_APE)
-        $("#user_role_id").val(data.USER_ROLE_ID)
-        $("#user_typedoc").val(data.USER_TYPEDOC)
+        $("#user_role_id").val(data.USER_ROLE_ID).trigger('change');
+        $("#user_typedoc").val(data.USER_TYPEDOC).trigger('change');
         $("#user_document").val(data.USER_DOCUMENT)
         $("#user_email").val(data.USER_EMAIL)
         $("#user_number").val(data.USER_NUMBER)

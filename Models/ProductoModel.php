@@ -46,15 +46,16 @@
             $mon_id, $prod_pcompra,$prod_pventa, $prod_stock, $prod_fecha_en, $prod_img){
 
             $conectar = parent::conexion();
-            require_once("ProductoModel.php");
-            $prod = new Producto();
-            $prod_img = ''; // Inicializa prod_img como cadena vacía
-        
-            // Verificar si el archivo prod_img ha sido subido
-            if($_FILES["prod_img"]["name"] !=''){
-                $prod_img=$prod->upload_image();
-            }
-        
+
+                require_once("ProductoModel.php");
+                $prod = new Producto();
+                $prod_img = ''; // Inicializa prod_img como cadena vacía
+            
+                // Verificar si el archivo prod_img ha sido subido
+                if($_FILES["prod_img"]["name"] !=''){
+                    $prod_img=$prod->upload_image();
+                }
+            
                 // Preparar y ejecutar la consulta
                 $sql = "SP_I_PRODUCTO_01 ?,?,?,?,?,?,?,?,?,?,?";
                 $sql_query = $conectar->prepare($sql);
@@ -81,21 +82,29 @@
                                             $prod_pcompra,$prod_pventa, 
                                             $prod_stock, $prod_fecha_en,$prod_img){
             $conectar = parent::conexion();
-            $sql = "SP_U_PRODUCTO_01 ?,?,?,?,?,?,?,?,?,?,?,?";
-            $sql_query=$conectar->prepare($sql);
-            $sql_query->bindValue(1, $prod_id);
-            $sql_query->bindValue(2, $suc_id);
-            $sql_query->bindValue(3, $cat_id);
-            $sql_query->bindValue(4, $prod_name);
-            $sql_query->bindValue(5, $prod_description);
-            $sql_query->bindValue(6, $unid_id);
-            $sql_query->bindValue(7, $mon_id);
-            $sql_query->bindValue(8, $prod_pcompra);
-            $sql_query->bindValue(9, $prod_pventa);
-            $sql_query->bindValue(10, $prod_stock);
-            $sql_query->bindValue(11, $prod_fecha_en);
-            $sql_query->bindValue(12, $prod_img);
-            $sql_query->execute();
+                require_once("ProductoModel.php");
+                $prod=new Producto();
+                $prod_img='';
+                if($_FILES["prod_img"]["name"] !=''){
+                    $prod_img=$prod->upload_image();
+                }else{
+                    $prod_img = $POST["hidden_producto_imagen"];
+                }
+                $sql = "SP_U_PRODUCTO_01 ?,?,?,?,?,?,?,?,?,?,?,?";
+                $sql_query=$conectar->prepare($sql);
+                $sql_query->bindValue(1, $prod_id);
+                $sql_query->bindValue(2, $suc_id);
+                $sql_query->bindValue(3, $cat_id);
+                $sql_query->bindValue(4, $prod_name);
+                $sql_query->bindValue(5, $prod_description);
+                $sql_query->bindValue(6, $unid_id);
+                $sql_query->bindValue(7, $mon_id);
+                $sql_query->bindValue(8, $prod_pcompra);
+                $sql_query->bindValue(9, $prod_pventa);
+                $sql_query->bindValue(10, $prod_stock);
+                $sql_query->bindValue(11, $prod_fecha_en);
+                $sql_query->bindValue(12, $prod_img);
+                $sql_query->execute();
 
             
             
@@ -107,10 +116,10 @@
                 $destination = '../assets/productos/' . $new_name;
                 move_uploaded_file($_FILES['prod_img']['tmp_name'], $destination);
                 return $new_name;
-            }
+            
         }
     
 
     }
-
+}
 ?>

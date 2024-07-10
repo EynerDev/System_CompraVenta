@@ -110,7 +110,7 @@ function editar(cli_id){
         data=JSON.parse(data);
         $("#cli_id").val(data.CLI_ID)
         $("#cli_name").val(data.CLI_NAME)
-        $("#tipo_doc_id").val(data.TIPO_DOC_ID)
+        $("#tipo_doc_id").val(data.TIPO_DOC_ID).trigger('change');
         $("#cli_doc").val(data.CLI_DOC)
         $("#cli_number").val(data.CLI_NUMBER)
         $("#cli_direcc").val(data.CLI_DIRECC)
