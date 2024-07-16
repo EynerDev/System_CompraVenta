@@ -1,7 +1,15 @@
 <?php
     require_once("../../Config/conn.php");
+    require_once("../../Models/RolModel.php");
+
+    $rol = new Rol();
+    $datos = $rol->validar_acceso_rol($_SESSION["USER_ID"],"mntcompra");
     if (isset($_SESSION["USER_ID"])){
+        if(is_array($datos) and count($datos)> 0){
+
+
 ?>
+
 
 <!doctype html>
 <html lang="es" data-layout="vertical" data-topbar="light" data-sidebar="dark" data-sidebar-size="lg" data-sidebar-image="none">
@@ -170,6 +178,7 @@
                                             <table id="table_datos" name="table_datos" class="table table-bordered dt-responsive nowrap table-striped align-middle" style="width:100%">
                                                 <thead>
                                                     <tr>
+                                                        <th></th>
                                                         <th>Categoria</th>
                                                         <th>Producto</th>
                                                         <th>Unidad</th>
@@ -248,7 +257,12 @@
 
 </html>
 <?php
-}else{
-    header("Location:".conectar::baseUrl()."Views/404/");
-}
+        }else{
+        
+            header("Location:".conectar::baseUrl()."Views/404/");
+
+        }
+    }else{
+        header("Location:".conectar::baseUrl()."Views/404/");
+    }
 ?>

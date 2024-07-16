@@ -1,5 +1,12 @@
 <?php
-    require_once("../../Config/conn.php")
+    require_once("../../Config/conn.php");
+    require_once("../../Models/RolModel.php");
+
+    $rol = new Rol();
+    $datos = $rol->validar_acceso_rol($_SESSION["USER_ID"],"dashboard");
+    if (isset($_SESSION["USER_ID"])){
+        if(is_array($datos) and count($datos)> 0){
+
 
 ?>
 
@@ -682,3 +689,13 @@
 </body>
 
 </html>
+<?php
+        }else{
+        
+            header("Location:".conectar::baseUrl()."Views/404/");
+
+        }
+    }else{
+        header("Location:".conectar::baseUrl()."Views/404/");
+    }
+?>

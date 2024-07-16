@@ -54,6 +54,15 @@
             
             
         }
+        public function validar_acceso_rol($user_id, $men_identi) {
+            $conectar = parent::conexion();
+            $sql = "SP_LISTAR_MENU_03 ?,?";
+            $sql_query = $conectar->prepare($sql);
+            $sql_query->bindValue(1, $user_id, PDO::PARAM_INT);
+            $sql_query->bindValue(2, $men_identi, PDO::PARAM_INT);
+            $sql_query->execute();
+            return $sql_query->fetchAll(PDO::FETCH_ASSOC);
+        }
 
     }
 

@@ -1,8 +1,14 @@
 <?php
     require_once("../../Config/conn.php");
-    if (isset($_SESSION["USER_ID"])){
-?>
+    require_once("../../Models/RolModel.php");
 
+    $rol = new Rol();
+    $datos = $rol->validar_acceso_rol($_SESSION["USER_ID"],"listcompra");
+    if (isset($_SESSION["USER_ID"])){
+        if(is_array($datos) and count($datos)> 0){
+
+
+?>
 <!doctype html>
 <html lang="es" data-layout="vertical" data-topbar="light" data-sidebar="dark" data-sidebar-size="lg" data-sidebar-image="none">
 
@@ -119,7 +125,12 @@
 
 </html>
 <?php
-}else{
-    header("Location:".conectar::baseUrl()."Views/404/");
-}
+        }else{
+        
+            header("Location:".conectar::baseUrl()."Views/404/");
+
+        }
+    }else{
+        header("Location:".conectar::baseUrl()."Views/404/");
+    }
 ?>

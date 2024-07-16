@@ -24,6 +24,8 @@
             $sql_query->bindValue(1, $mend_id, PDO::PARAM_INT);
             $sql_query->execute();
         }
+
+        
     }
 
 ?>

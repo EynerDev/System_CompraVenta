@@ -137,6 +137,7 @@
                                                     <table class="table table-borderless text-center table-nowrap align-middle mb-0" >
                                                         <thead>
                                                             <tr class="table-detail_pdf">
+                                                                <th scope="col"></th>
                                                                 <th scope="col">Categoria</th>
                                                                 <th scope="col">Producto</th>
                                                                 <th scope="col">Unidad</th>

@@ -26,6 +26,21 @@ switch($_GET["op"]){
         if(is_array($datos) == TRUE and count($datos) > 0){
             foreach($datos as $row){
                 $sub_array = array();
+                if ($row["PROD_IMG"] != ''){
+                    $sub_array[] =
+                    "<div class='d-flex align-items-center'>" .
+                        "<div class='flex-shrink-0 me-2'>".
+                            "<img src='../../assets/productos/".$row["PROD_IMG"]."' alt='' class='avatar-xs rounded-circle'>".
+                        "</div>".
+                    "</div>";
+                }else{
+                    $sub_array[] =
+                    "<div class='d-flex align-items-center'>" .
+                        "<div class='flex-shrink-0 me-2'>".
+                            "<img src='../../assets/productos/error_404.jpeg' alt='' class='avatar-xs rounded-circle'>".
+                        "</div>".
+                    "</div>";
+                }
                 $sub_array[]= $row["CAT_NAME"];
                 $sub_array[]= $row["PROD_NAME"];
                 $sub_array[]= $row["UNID_NAME"];
@@ -119,12 +134,40 @@ switch($_GET["op"]){
             foreach($datos as $row){
             ?>
                 <tr>
-                    <th scope=""><?php echo $row["CAT_NAME"]?></th>
-                    <th scope=""><?php echo $row["PROD_NAME"]?></th>
-                    <th scope="row"><?php echo $row["UNID_NAME"]?></th>
-                    <th scope=""><?php echo $row["PROD_PCOMPRA"]?></th>
-                    <th scope=""><?php echo $row["DET_CANT"]?></th>
-                    <th scope="text_end"><?php echo $row["DET_TOTAL"]?></th>
+                <td scope="">
+                    <?php 
+                        if ($row["PROD_IMG"] != ''){
+                            ?>
+                                <?php 
+                                    echo "<div class='d-flex align-items-center'>" .
+                                        "<div class='flex-shrink-0 me-2'>".
+                                            "<img src='../../assets/productos/".$row["PROD_IMG"]."' alt='' class='avatar-xs rounded-circle'>".
+                                        "</div>".
+                                    "</div>";
+                                ?>
+                            <?php 
+                        }else{
+                            ?>
+                                <?php 
+                                    echo "<div class='d-flex align-items-center'>" .
+                                        "<div class='flex-shrink-0 me-2'>".
+                                            "<img src='../../assets/productos/error_404.jpeg' alt='' class='avatar-xs rounded-circle'>".
+                                        "</div>".
+                                    "</div>";
+                                ?>
+                            <?php 
+                        }
+                
+                    ?>
+                </td>
+
+                
+                    <td scope=""><?php echo $row["CAT_NAME"]?></td>
+                    <td scope=""><?php echo $row["PROD_NAME"]?></td>
+                    <td scope="row"><?php echo $row["UNID_NAME"]?></td>
+                    <td scope=""><?php echo $row["PROD_PCOMPRA"]?></td>
+                    <td scope=""><?php echo $row["DET_CANT"]?></td>
+                    <td scope="text_end"><?php echo $row["DET_TOTAL"]?></td>
             
                 </tr>
               
