@@ -67,6 +67,7 @@
                                                 <thead>
                                                     <tr>
                                                         <th>#</th>
+                                                        <th>Doc.</th>
                                                         <th>Cliente</th>
                                                         <th>Documento</th>
                                                         <th>Pago</th>
@@ -75,6 +76,7 @@
                                                         <th>IVA</th>
                                                         <th>Total</th>
                                                         <th>Usuario</th>
+                                                        <th>Fecha de compra</th>
                                                         <th></th>
                                                         <th></th>
                                                         <th></th>

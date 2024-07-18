@@ -137,7 +137,13 @@ function eliminar(role_id){
 
     }));
 }
+
+
 function permisos(role_id){
+
+    $.post("../../Controller/MenuController.php?op=insert",{role_id:role_id}, function(data){
+    })
+
     $('#permisos_data').DataTable({
         "aProcessing": true,
         "aServerSide": true,

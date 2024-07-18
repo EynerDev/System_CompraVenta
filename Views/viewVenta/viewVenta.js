@@ -12,11 +12,11 @@ $(document).ready(function() {
         $("#venta_id").html(data.VENTA_ID);
         $("#txt_sitio").html(data.EMP_WEBSITE);
         $('#pago_id').html(data.PAGO_NAME);
-        $("#venta_total").html(data.VENTA_TOTAL);
-        $("#created_at").html(data.CREATED_AT);
-        $("#sub_total").html(data.VENTA_SUB_TOTAL);
-        $("#venta_iva").html(data.VENTA_IVA);
-        $("#venta_total2").html(data.VENTA_TOTAL);
+        $("#venta_total").html(data.TOTAL);
+        $("#created_at").html(data.FECHA_VENTA);
+        $("#sub_total").html(data.SUB_TOTAL);
+        $("#venta_iva").html(data.IVA);
+        $("#venta_total2").html(data.TOTAL);
         $("#venta_coment").html(data.VENTA_COMENT);
         $("#mon_name").html(data.MON_NAME);
         $("#user_name").html(data.USER_NAME + ' ' + data.USER_APE);

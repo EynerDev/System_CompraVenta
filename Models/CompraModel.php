@@ -56,10 +56,11 @@
             $prov_email,
             $mon_id,
             $prov_number, 
-            $prov_coment
+            $prov_coment,
+            $doc_id
         ){
             $conectar = parent::conexion();
-            $sql = "SP_U_COMPRA_03 ?,?,?,?,?,?,?,?,?";
+            $sql = "SP_U_COMPRA_03 ?,?,?,?,?,?,?,?,?,?";
             $sql_query=$conectar->prepare($sql);
             $sql_query->bindValue(1, $compra_id);
             $sql_query->bindValue(2, $pago_id);
@@ -70,6 +71,7 @@
             $sql_query->bindValue(7, $mon_id);
             $sql_query->bindValue(8, $prov_number);
             $sql_query->bindValue(9, $prov_coment);
+            $sql_query->bindValue(10, $doc_id);
             $sql_query->execute();
         }
         public function get_compra_pdf($compra_id){
@@ -96,6 +98,15 @@
             $sql_query=$conectar->prepare($sql);
             $sql_query->bindValue(1, $compra_id);
             $sql_query->execute();
+        }
+        public function get_compra_top_productos($suc_id){
+            $conectar = parent::conexion();
+            $sql = "SP_L_TOP_PRODUCTOS_01 ?";
+            $sql_query=$conectar->prepare($sql);
+            $sql_query->bindValue(1, $suc_id);
+            $sql_query->execute();
+            return $sql_query->fetchAll(PDO::FETCH_ASSOC);     
+
         }
 }
 

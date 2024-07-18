@@ -10,6 +10,14 @@
             $sql_query->execute();
             return $sql_query->fetchAll(PDO::FETCH_ASSOC);
         }
+        public function insert_menu_role_id($role_id) {
+            $conectar = parent::conexion();
+            $sql = "SP_I_MENU_02 ?";
+            $sql_query = $conectar->prepare($sql);
+            $sql_query->bindValue(1, $role_id, PDO::PARAM_INT);
+            $sql_query->execute();
+        }
+
         public function update_menu_habilitar($mend_id) {
             $conectar = parent::conexion();
             $sql = "SP_U_MENU_01 ?";

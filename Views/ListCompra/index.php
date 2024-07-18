@@ -68,6 +68,7 @@
                                                     <tr>
                                                         <th>#</th>
                                                         <th>Proveedor</th>
+                                                        <th>Doc.</th>
                                                         <th>RUT</th>
                                                         <th>Pago</th>
                                                         <th>Moneda</th>
@@ -75,6 +76,7 @@
                                                         <th>IVA</th>
                                                         <th>Total</th>
                                                         <th>Usuario</th>
+                                                        <th>Fecha Compra</th>
                                                         <th></th>
                                                         <th></th>
                                                         <th></th>

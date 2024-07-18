@@ -133,9 +133,9 @@ function calculo_detalle(venta_id){
         venta_id: venta_id, })
         .done(function(data){
             data = JSON.parse(data)
-            $('#venta_sub_total').html(data.VENTA_SUB_TOTAL)
-            $("#venta_iva").html(data.VENTA_IVA)
-            $("#venta_total").html(data.VENTA_TOTAL)
+            $('#venta_sub_total').html(data.SUB_TOTAL)
+            $("#venta_iva").html(data.IVA)
+            $("#venta_total").html(data.TOTAL)
         })
         .fail(function(error) {
             console.error("Error en la solicitud:", error);

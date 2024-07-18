@@ -3,8 +3,7 @@ let suc_id = $('#SUC_IDx').val()
 let user_id = $('#USER_IDx').val()
 $(document).ready(function() {
 
-    $('#cat_id, #prod_id, #pago_id, #mon_id').select2();
-    $('#cli_id').select2()
+    $('#cat_id, #prod_id, #pago_id, #mon_id, #cli_id, #doc_id').select2();
 
 
     $.post("../../Controller/VentaController.php?op=registrar",{suc_id:suc_id, user_id:user_id})
@@ -13,6 +12,14 @@ $(document).ready(function() {
         $('#venta_id').val(data.VENTA_ID)
         
     })
+    $.post("../../Controller/DocumentoController.php?op=combo",{doc_tipo:"Venta"})
+    .done(function(data) {
+        $("#doc_id").html(data)  
+        
+    })
+    .fail(function(error) {
+        console.error("Error en la solicitud:", error);
+    });
 
     $.post("../../Controller/MonedaController.php?op=combo",{suc_id:suc_id})
     .done(function(data) {
@@ -184,9 +191,9 @@ function calculo_detalle(venta_id){
         venta_id: venta_id, })
         .done(function(data){
             data = JSON.parse(data)
-            $('#venta_sub_total').html(data.VENTA_SUB_TOTAL)
-            $("#venta_iva").html(data.VENTA_IVA)
-            $("#venta_total").html(data.VENTA_TOTAL)
+            $('#venta_sub_total').html(data.SUB_TOTAL)
+            $("#venta_iva").html(data.IVA)
+            $("#venta_total").html(data.TOTAL)
         })
         .fail(function(error) {
             console.error("Error en la solicitud:", error);
@@ -210,6 +217,8 @@ if (isEmpty(venta_id) || isEmpty(prod_id) || isEmpty(prod_pventa) || isEmpty(det
         icon: "error",
     });
 } else {
+
+    
     $.post("../../Controller/VentaController.php?op=detalle", {
         venta_id: venta_id,
         prod_id: prod_id,
@@ -218,15 +227,29 @@ if (isEmpty(venta_id) || isEmpty(prod_id) || isEmpty(prod_pventa) || isEmpty(det
     })
     .done(function(data) {
         // Acciones a realizar en caso de éxito
-        calculo_detalle(venta_id);
-        
-        $("#prod_pventa").val('')
-        $("#prod_stock").val('')
-        init_table(venta_id)
+        let datos = JSON.parse(data);
+        console.log(datos)
 
-        
+            if (datos.success) {
+                // Acciones a realizar en caso de éxito
+                swal.fire({
+                    title: "Éxito",
+                    text: datos.message,
+                    icon: "success",
+                });
 
-    
+                calculo_detalle(venta_id);
+                $("#prod_pventa").val('');
+                $("#prod_stock").val('');
+                init_table(venta_id);
+            } else {
+                // Mostrar error en caso de stock insuficiente
+                swal.fire({
+                    title: "Error",
+                    text: datos.message,
+                    icon: "error",
+                });
+            }
     })
     .fail(function(error) {
         console.error("Error en la solicitud:", error);
@@ -248,8 +271,9 @@ $(document).on("click","#btn_guardar",function(){
     let mon_id = $("#mon_id").val()
     let venta_coment = $("#venta_coment").val()
     let cli_direcc = $("#cli_direcc").val()
+    let doc_id = $("#doc_id").val()
 
-    if (isEmpty(venta_id) || isEmpty(pago_id) || isEmpty(cli_id) || isEmpty(cli_tipo_doc_id) 
+    if (isEmpty(doc_id) || isEmpty(venta_id) || isEmpty(pago_id) || isEmpty(cli_id) || isEmpty(cli_tipo_doc_id) 
         || isEmpty(cli_doc) || isEmpty(cli_email) || isEmpty(cli_number) 
         || isEmpty(cli_direcc) || isEmpty(mon_id) )
         {
@@ -262,7 +286,7 @@ $(document).on("click","#btn_guardar",function(){
         $.post("../../Controller/VentaController.php?op=calculo",{venta_id: venta_id})
         .done(function(data){
             datos = JSON.parse(data)
-            if (isEmpty(datos.VENTA_TOTAL)){
+            if (isEmpty(datos.TOTAL)){
                 swal.fire({
                     title: "Venta",
                     text: "No existen detalles",
@@ -281,6 +305,7 @@ $(document).on("click","#btn_guardar",function(){
                     cli_number: cli_number,
                     mon_id: mon_id,
                     venta_coment: venta_coment,
+                    doc_id: doc_id,
                     
                 })
                 .done(function() {

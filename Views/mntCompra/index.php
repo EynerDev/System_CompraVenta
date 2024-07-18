@@ -69,6 +69,12 @@
                                             <div class="live-preview">
                                                 <div class="row align-items-center g-3">
                                                     <div class="col-lg-4">
+                                                        <h6 class="fw-semiboldT">Tipo Documento</h6>
+                                                            <select class="js-example-basic-single" id="doc_id" name="doc_id">
+                                                                <option selected>Seleccionar</option>
+                                                            </select>
+                                                    </div>
+                                                    <div class="col-lg-4">
                                                         <h6 class="fw-semibold">Metodo de Pago</h6>
                                                             <select class="js-example-basic-single" id="pago_id" name="pago_id">
                                                                 <option selected>Seleccionar</option>

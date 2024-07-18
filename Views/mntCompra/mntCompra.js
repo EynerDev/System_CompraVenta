@@ -3,13 +3,22 @@ let suc_id = $('#SUC_IDx').val()
 let user_id = $('#USER_IDx').val()
 $(document).ready(function() {
 
-    $('#prov_id, #cat_id, #prod_id, #pago_id, #mon_id').select2();
+    $('#prov_id, #cat_id, #prod_id, #pago_id, #mon_id, #doc_id').select2();
 
 
     $.post("../../Controller/CompraController.php?op=registrar",{suc_id:suc_id, user_id:user_id})
     .done(function(data) {
         data = JSON.parse(data)
         $('#compra_id').val(data.COMPRA_ID)
+        
+    })
+    .fail(function(error) {
+        console.error("Error en la solicitud:", error);
+    });
+
+    $.post("../../Controller/DocumentoController.php?op=combo",{doc_tipo:"Compra"})
+    .done(function(data) {
+        $("#doc_id").html(data)  
         
     })
     .fail(function(error) {
@@ -189,9 +198,10 @@ function calculo_detalle(compra_id){
         compra_id: compra_id, })
         .done(function(data){
             data = JSON.parse(data)
-            $('#compra_sub_total').html(data.SUBTOTAL)
+            console.log(data)
+            $('#compra_sub_total').html(data.SUB_TOTAL)
             $("#compra_iva").html(data.IVA)
-            $("#compra_total").html(data.TOTAL)
+            $("#compra_total").html(data.SUB_TOTAL)
         })
         .fail(function(error) {
             console.error("Error en la solicitud:", error);
@@ -242,6 +252,7 @@ if (isEmpty(compra_id) || isEmpty(prod_id) || isEmpty(prod_pcompra) || isEmpty(d
 $(document).on("click","#btn_guardar",function(){
     let compra_id = $("#compra_id").val()
     let prov_id = $("#prov_id").val()
+    let doc_id = $("#doc_id").val()
     let pago_id = $("#pago_id").val()
     let prov_rut = $("#prov_rut").val()
     let prov_dirc = $("#prov_direcc").val()
@@ -250,7 +261,7 @@ $(document).on("click","#btn_guardar",function(){
     let prov_number = $("#prov_number").val()
     let prov_coment = $("#prov_coment").val()
 
-    if (isEmpty(compra_id) || isEmpty(prov_id) || isEmpty(pago_id) || isEmpty(prov_rut) 
+    if (isEmpty(doc_id) || isEmpty(compra_id) || isEmpty(prov_id) || isEmpty(pago_id) || isEmpty(prov_rut) 
         || isEmpty(prov_dirc) || isEmpty(prov_email) || isEmpty(mon_id) 
         || isEmpty(prov_number))
         {
@@ -282,6 +293,7 @@ $(document).on("click","#btn_guardar",function(){
                     mon_id: mon_id,
                     prov_number: prov_number,
                     prov_coment: prov_coment,
+                    doc_id:doc_id
                 })
                 .done(function() {
             

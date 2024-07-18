@@ -7,10 +7,11 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-            <<table id="detalle_data" name="table_datos" class="table table-bordered dt-responsive nowrap table-striped align-middle" style="width:100%">
+            <table id="detalle_data" name="table_datos" class="table table-bordered dt-responsive nowrap table-striped align-middle" style="width:100%">
                 <thead>
                     <tr>
-                        <th>Categoria</th>
+                            <th></th>
+                            <th>Categoria</th>
                             <th>Producto</th>
                             <th>Unidad</th>
                             <th>P.Venta</th>

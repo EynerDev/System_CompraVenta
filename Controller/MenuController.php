@@ -44,5 +44,8 @@
         case "inhabilitar":
             $menu->update_menu_inhabilitar($_POST["mend_id"]);
             break;
+        case "insert":
+            $menu->insert_menu_role_id($_POST["role_id"]);
+            break;
         }
 ?>

@@ -133,7 +133,7 @@ function calculo_detalle(compra_id){
         compra_id: compra_id, })
         .done(function(data){
             data = JSON.parse(data)
-            $('#compra_sub_total').html(data.SUBTOTAL)
+            $('#compra_sub_total').html(data.SUB_TOTAL)
             $("#compra_iva").html(data.IVA)
             $("#compra_total").html(data.TOTAL)
         })

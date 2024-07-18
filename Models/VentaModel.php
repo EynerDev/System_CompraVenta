@@ -56,10 +56,11 @@
             $cli_email,
             $cli_number,
             $mon_id, 
-            $venta_coment
+            $venta_coment,
+            $doc_id
         ){
             $conectar = parent::conexion();
-            $sql = "SP_U_VENTA_03 ?,?,?,?,?,?,?,?,?,?";
+            $sql = "SP_U_VENTA_03 ?,?,?,?,?,?,?,?,?,?,?";
             $sql_query=$conectar->prepare($sql);
             $sql_query->bindValue(1, $venta_id);
             $sql_query->bindValue(2, $pago_id);
@@ -71,6 +72,7 @@
             $sql_query->bindValue(8, $cli_number);
             $sql_query->bindValue(9, $mon_id);
             $sql_query->bindValue(10,$venta_coment);
+            $sql_query->bindValue(11,$doc_id);
             $sql_query->execute();
         }
         public function get_venta_pdf($venta_id){
@@ -91,12 +93,38 @@
             return $sql_query->fetchAll(PDO::FETCH_ASSOC); 
         
         }
+        public function get_stock_actual($prod_id) {
+            $conectar = parent::conexion();
+            $sql = "SP_GET_STOCK_ACTUAL ?";
+            $sql_query = $conectar->prepare($sql);
+            $sql_query->bindValue(1, $prod_id, PDO::PARAM_INT);
+            $sql_query->execute();
+            $result = $sql_query->fetch(PDO::FETCH_ASSOC);
+        
+            // Asegúrate de que el valor devuelto sea un entero
+            if ($result && isset($result['PROD_STOCK'])) {
+                return (int)$result['PROD_STOCK']; // Convierte el valor a entero
+            } else {
+                return 0; // Devuelve 0 si no hay resultados o el stock no está definido
+            }
+        }
+        
+        
         public function update_stock_venta($venta_id){
             $conectar = parent::conexion();
             $sql = "SP_U_STOCK_VENTA_01 ?";
             $sql_query=$conectar->prepare($sql);
             $sql_query->bindValue(1, $venta_id);
             $sql_query->execute();
+        }
+        public function get_venta_top_productos($suc_id){
+            $conectar = parent::conexion();
+            $sql = "SP_L_TOP_PRODUCTOS_02 ?";
+            $sql_query=$conectar->prepare($sql);
+            $sql_query->bindValue(1, $suc_id);
+            $sql_query->execute();
+            return $sql_query->fetchAll(PDO::FETCH_ASSOC);     
+
         }
 }
 
