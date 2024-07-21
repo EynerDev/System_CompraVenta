@@ -23,9 +23,10 @@
             $datos_proveedor=$proveedor->get_proveedor_empresa_id($_SESSION["EMP_ID"]);
 ?>
 
+
 <!doctype html>
-<html lang="es" data-layout="vertical" data-topbar="light" data-sidebar="dark" data-sidebar-size="lg" data-sidebar-image="none">
-<head>
+<?php require_once("../html/html_head.php"); ?>
+ <head>
     <title>EynerDev | Home</title>
     <?php require_once("../html/head.php"); ?>
 
@@ -293,7 +294,7 @@
 
                                             <div class="card-body">
                                                 <!-- TODO: Consumo de Compras por categoria -->
-                                                <canvas id="grafdona" class="chartjs-chart" data-colors='["--vz-primary", "--vz-success", "--vz-warning", "--vz-danger", "--vz-info", "--vz-black"]'></canvas>
+                                                <canvas id="doughnut" class="chartjs-chart" data-colors='["--vz-primary", "--vz-success", "--vz-warning", "--vz-danger", "--vz-info", "--vz-black"]'></canvas>
                                             </div>
                                         </div>
                                     </div>
@@ -350,7 +351,7 @@
 
                                         <!-- TODO: Total de Categoria -->
                                         <div class="p-3 mt-2">
-                                            <h6 class="text-muted mb-3 text-uppercase fw-semibold">Total de Stock por Categoria
+                                            <h6 class="text-muted mb-3 text-uppercase fw-semibold">Stock por Categoria
                                             </h6>
 
                                             <ol class="ps-3 text-muted" id="listcategoriastock">
@@ -394,8 +395,6 @@
 
     <!-- Chart JS -->
     <script src="../../assets/libs/chart.js/chart.min.js"></script>
-
-    <script src="../../assets/js/pages/chartjs.init.js"></script>
 
     <script type="text/javascript" src="home.js"></script>
 </body>

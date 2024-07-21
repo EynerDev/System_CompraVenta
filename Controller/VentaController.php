@@ -268,7 +268,7 @@ case "detalle":
                                 
                                     ?>
                                     <div>
-                                        <h5 class="fs-14 my-1"><a href="apps-ecommerce-product-details.html" class="text-reset"><?php echo $row["PROD_NAME"]?></a></h5>
+                                        <h5 class="fs-14 my-1"><?php echo $row["PROD_NAME"]?></a></h5>
                                         <span class="text-muted"><?php echo $row["CAT_NAME"]?></span>
                                     </div>
                                 </div> 

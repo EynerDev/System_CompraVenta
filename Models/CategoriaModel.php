@@ -54,6 +54,15 @@
             
             
         }
+        public function get_categoria_total_stock($suc_id){
+            $conectar = parent::conexion();
+            $sql = "SP_L_CATEGORIA_STOCK ?";
+            $sql_query=$conectar->prepare($sql);
+            $sql_query->bindValue(1, $suc_id);
+            $sql_query->execute();
+            return $sql_query->fetchAll(PDO::FETCH_ASSOC);
+            
+        }
 
     }
 
