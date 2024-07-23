@@ -126,6 +126,15 @@
             return $sql_query->fetchAll(PDO::FETCH_ASSOC);     
 
         }
+        public function get_venta_grafico_barra($suc_id){
+            $conectar = parent::conexion();
+            $sql = "SP_CONSUMO_VENTAS_DIARIAS ?";
+            $sql_query=$conectar->prepare($sql);
+            $sql_query->bindValue(1, $suc_id);
+            $sql_query->execute();
+            return $sql_query->fetchAll(PDO::FETCH_ASSOC);     
+
+        }
 }
 
 ?>

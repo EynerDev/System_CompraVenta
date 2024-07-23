@@ -121,5 +121,14 @@
     
 
     }
+    public function get_compra_venta_entrada_producto($prod_id){
+        $conectar = parent::conexion();
+        $sql = "SP_L_COMPRAS_VENTA_05 ?";
+        $sql_query=$conectar->prepare($sql);
+        $sql_query->bindValue(1, $prod_id);
+        $sql_query->execute();
+        return $sql_query->fetchAll(PDO::FETCH_ASSOC); 
+    
+    }
 }
 ?>

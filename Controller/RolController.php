@@ -42,9 +42,9 @@ switch($_GET["op"]) {
             $sub_array[] = $row["ROLE_NAME"];
             $sub_array[] = $row["CREATED_AT"];
             // Botones para gestionar permisos, editar y eliminar el rol
-            $sub_array[] = '<button type="button" onClick="permisos('.$row["ROLE_ID"].')" id="'.$row["ROLE_ID"].'" class="btn btn-primary btn-label waves-effect waves-light"><i class="ri-user-line label-icon align-middle fs-16 me-2"></i> Permisos</button>';
-            $sub_array[] = '<button type="button" onClick="editar('.$row["ROLE_ID"].')" id="'.$row["ROLE_ID"].'" class="btn btn-warning btn-label waves-effect waves-light"><i class="ri-edit-box-fill label-icon align-middle fs-16 me-2"></i> Editar</button>';
-            $sub_array[] = '<button type="button" onClick="eliminar('.$row["ROLE_ID"].')" id="'.$row["ROLE_ID"].'" class="btn btn-danger btn-label waves-effect waves-light"><i class="ri-delete-bin-5-line label-icon align-middle fs-16 me-2"></i> Eliminar</button>'; 
+            $sub_array[] = '<button type="button" onClick="permisos('.$row["ROLE_ID"].')" id="'.$row["ROLE_ID"].'" class="btn btn-soft-info btn-icon waves-effect waves-light layout-rightside-btn"><i class="ri-eye-line label-icon"></i></button>';
+            $sub_array[] = '<button type="button" onClick="editar('.$row["ROLE_ID"].')" id="'.$row["ROLE_ID"].'" class="btn btn-soft-warning btn-icon waves-effect waves-light layout-rightside-btn"><i class="ri-edit-line label-icon label-icon align-middle"></i></button>';
+            $sub_array[] = '<button type="button" onClick="eliminar('.$row["ROLE_ID"].')" id="'.$row["ROLE_ID"].'" class="btn btn-soft-danger btn-icon waves-effect waves-light layout-rightside-btn"><i class="ri-delete-bin-5-line label-icon "></i></button>'; 
             $data[] = $sub_array;
         }
 

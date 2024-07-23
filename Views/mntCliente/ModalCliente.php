@@ -19,7 +19,7 @@
                             </div>
                         </div><!--end col-->
 
-                        <div class="col-lg-4">
+                        <div class="col-xxl-6">
                             <h6 class="fw-semibold">Tipo Documento:</h6>
                             <select class="js-example-basic-single" id="tipo_doc_id" name="tipo_doc_id">
                             </select>

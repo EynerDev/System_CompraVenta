@@ -53,7 +53,7 @@ $.ajax({
     },
     success: function(response) {
         var data = JSON.parse(response);
-        console.log(data); // Agrega esta línea para ver la estructura de los datos
+
         var cantidad = [];
         var categoria = [];
 
@@ -61,8 +61,6 @@ $.ajax({
             cantidad.push(data[i].CANT);
             categoria.push(data[i].CAT_NAME);
         }
-
-        console.log('Categoría:', categoria); // Verifica si el array categoría se está llenando correctamente
 
         // Construir el gráfico
         var isdoughnutchart = document.getElementById("doughnut");
@@ -93,5 +91,135 @@ $.ajax({
                 }
             });
         }
+    }
+})
+
+
+
+$.ajax({
+    url: "../../Controller/VentaController.php?op=ventabarras",
+    method: "POST",
+    data: {
+        suc_id: suc_id
+    },
+    success: function(response) {
+        var data = JSON.parse(response);
+        console.log(data)
+
+        var dias = [];
+        var total_ventas = [];
+
+        for (var i in data) {
+            dias.push(data[i].FECHA);
+            total_ventas.push(data[i].TOTAL);
+        }
+
+
+        var barChart, isbarchart = document.getElementById("grafventa");
+        barChartColor = getChartColorsArray("grafventa"), barChartColor && (isbarchart.setAttribute("width", isbarchart.parentElement.offsetWidth), barChart = new Chart(isbarchart, {
+            type: "bar",
+            data: {
+                labels: dias ,
+                datasets: [{
+                    label: "Ventas Diarias",
+                    backgroundColor: barChartColor[0],
+                    borderColor: barChartColor[0],
+                    borderWidth: 1,
+                    hoverBackgroundColor: barChartColor[1],
+                    hoverBorderColor: barChartColor[1],
+                    data: total_ventas
+                }]
+            },
+            options: {
+                x: {
+                    ticks: {
+                        font: {
+                            family: "Poppins"
+                        }
+                    }
+                },
+                y: {
+                    ticks: {
+                        font: {
+                            family: "Poppins"
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        labels: {
+                            font: {
+                                family: "Poppins"
+                            }
+                        }
+                    }
+                }
+            }
+        }));
+    }
+})
+
+
+$.ajax({
+    url: "../../Controller/CompraController.php?op=comprabarras",
+    method: "POST",
+    data: {
+        suc_id: suc_id
+    },
+    success: function(response) {
+        var data = JSON.parse(response);
+        console.log(data)
+
+        var dias = [];
+        var total_compras = [];
+
+        for (var i in data) {
+            dias.push(data[i].FECHA);
+            total_compras.push(data[i].TOTAL);
+        }
+
+
+        var barChart, isbarchart = document.getElementById("grafcompra");
+        barChartColor = getChartColorsArray("grafcompra"), barChartColor && (isbarchart.setAttribute("width", isbarchart.parentElement.offsetWidth), barChart = new Chart(isbarchart, {
+            type: "bar",
+            data: {
+                labels: dias,
+                datasets: [{
+                    label: "Compras Diarias",
+                    backgroundColor: barChartColor[0],
+                    borderColor: barChartColor[0],
+                    borderWidth: 1,
+                    hoverBackgroundColor: barChartColor[1],
+                    hoverBorderColor: barChartColor[1],
+                    data: total_compras
+                }]
+            },
+            options: {
+                x: {
+                    ticks: {
+                        font: {
+                            family: "Poppins"
+                        }
+                    }
+                },
+                y: {
+                    ticks: {
+                        font: {
+                            family: "Poppins"
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        labels: {
+                            font: {
+                                family: "Poppins"
+                            }
+                        }
+                    }
+                }
+            }
+        }))
+
     }
 })

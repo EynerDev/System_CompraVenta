@@ -54,8 +54,8 @@ switch($_GET["op"]){
             $sub_array[] = $row["EMP_RUT"];
             $sub_array[] = $row["CREATED_AT"];
             // Botones para editar y eliminar, con llamadas a funciones JavaScript
-            $sub_array[] = '<button type="button" onClick="editar('.$row["EMP_ID"].')" id="'.$row["EMP_ID"].'" class="btn btn-warning btn-label waves-effect waves-light"><i class="ri-edit-box-fill label-icon align-middle fs-16 me-2"></i> Editar</button>';
-            $sub_array[] = '<button type="button" onClick="eliminar('.$row["EMP_ID"].')" id="'.$row["EMP_ID"].'" class="btn btn-danger btn-label waves-effect waves-light"><i class="ri-delete-bin-5-line label-icon align-middle fs-16 me-2"></i> Eliminar</button>'; 
+            $sub_array[] = '<button type="button" onClick="editar('.$row["EMP_ID"].')" id="'.$row["EMP_ID"].'" class="btn btn-soft-warning btn-icon waves-effect waves-light layout-rightside-btn"><i class="ri-edit-line label-icon label-icon align-middle"></i></button>';
+            $sub_array[] = '<button type="button" onClick="eliminar('.$row["EMP_ID"].')" id="'.$row["EMP_ID"].'" class="btn btn-soft-danger btn-icon waves-effect waves-light layout-rightside-btn"><i class="ri-delete-bin-5-line label-icon "></i></button>'; 
             $data[] = $sub_array;
         }
 

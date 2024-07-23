@@ -204,9 +204,9 @@ switch ($_GET["op"]) {
                 $sub_array[] = $row["USER_NAME"] . " " . $row["USER_APE"];
                 $sub_array[] = $row["FECHA_COMPRA"];
                 // Añadir botones de acciones
-                $sub_array[] = '<button type="button" onClick="redirigirAVistaCompra(' . $row["COMPRA_ID"] . ')" id="' . $row["COMPRA_ID"] . '" class="btn btn-secondary btn-label waves-effect waves-light"><i class="ri-file-line label-icon align-middle fs-16 me-2"></i> VER PDF</button>';
-                $sub_array[] = '<button type="button" onClick="eliminar(' . $row["COMPRA_ID"] . ')" id="' . $row["COMPRA_ID"] . '" class="btn btn-danger btn-label waves-effect waves-light"><i class="ri-delete-bin-5-line label-icon align-middle fs-16 me-2"></i> Eliminar</button>';
-                $sub_array[] = '<button type="button" onClick="verDetalle(' . $row["COMPRA_ID"] . ')" id="' . $row["COMPRA_ID"] . '" class="btn btn-success btn-label waves-effect waves-light"><i class="ri-eye-line label-icon align-middle fs-16 me-2"></i> Ver detalle</button>';
+                $sub_array[] = '<button type="button" onClick="redirigirAVistaCompra(' . $row["COMPRA_ID"] . ')" id="' . $row["COMPRA_ID"] . '" class="btn btn-soft-secondary btn-icon waves-effect waves-light layout-rightside-btn"><i class="ri-file-list-3-line label-icom"></i></button>';
+                $sub_array[] = '<button type="button" onClick="eliminar(' . $row["COMPRA_ID"] . ')" id="' . $row["COMPRA_ID"] . '" class="btn btn-soft-danger btn-icon waves-effect waves-light layout-rightside-btn"><i class="ri-delete-bin-5-line label-icon "></i></button>';
+                $sub_array[] = '<button type="button" onClick="verDetalle(' . $row["COMPRA_ID"] . ')" id="' . $row["COMPRA_ID"] . '" class="btn btn-soft-info btn-icon waves-effect waves-light layout-rightside-btn"><i class="ri-eye-line label-icon"></i></button>';
                 $data[] = $sub_array;
             }
         }
@@ -353,5 +353,14 @@ switch ($_GET["op"]) {
         }
         echo json_encode($data);
         break;
+    case "comprabarras":
+        $datos = $compra->get_compra_grafico_barra($_POST["suc_id"]);
+        $data = array();
+        foreach ($datos as $row) {
+            $data[] = $row;
+        }
+        echo json_encode($data);
+        break;
+    
 }
 ?>

@@ -222,9 +222,9 @@ case "detalle":
                 $sub_array[]= $row["TOTAL"];
                 $sub_array[]= $row["USER_NAME"]." ".$row["USER_APE"];
                 $sub_array[]= $row["FECHA_VENTA"];
-                $sub_array[] = '<button type="button" onClick="redirigirAVistaVenta('.$row["VENTA_ID"].')" id="'.$row["VENTA_ID"].'" class="btn btn-secondary btn-label waves-effect waves-light"><i class="ri-file-line label-icon align-middle fs-16 me-2"></i> VER PDF</button>';
-                $sub_array[] = '<button type="button" onClick="eliminar('.$row["VENTA_ID"].')" id="'.$row["VENTA_ID"].'" class="btn btn-danger btn-label waves-effect waves-light"><i class="ri-delete-bin-5-line label-icon align-middle fs-16 me-2"></i> Eliminar</button>'; 
-                $sub_array[] = '<button type="button" onClick="verDetalle('.$row["VENTA_ID"].')" id="'.$row["VENTA_ID"].'" class="btn btn-success btn-label waves-effect waves-light"><i class="ri-eye-line label-icon align-middle fs-16 me-2"></i> Ver detalle</button>'; 
+                $sub_array[] = '<button type="button" onClick="redirigirAVistaVenta('.$row["VENTA_ID"].')" id="'.$row["VENTA_ID"].'" class="btn btn-soft-secondary btn-icon waves-effect waves-light layout-rightside-btn"><i class="ri-file-list-3-line label-icom"></i></button>';
+                $sub_array[] = '<button type="button" onClick="eliminar('.$row["VENTA_ID"].')" id="'.$row["VENTA_ID"].'" class="btn btn-soft-danger btn-icon waves-effect waves-light layout-rightside-btn"><i class="ri-delete-bin-5-line label-icon "></i></button>'; 
+                $sub_array[] = '<button type="button" onClick="verDetalle('.$row["VENTA_ID"].')" id="'.$row["VENTA_ID"].'" class="btn btn-soft-info btn-icon waves-effect waves-light layout-rightside-btn"><i class="ri-eye-line label-icon"></i></button>'; 
                 $data[] = $sub_array;
     
             }
@@ -307,5 +307,13 @@ case "detalle":
                     echo json_encode($datos);
                 }
         break; 
+    case "ventabarras":
+        $datos = $venta->get_venta_grafico_barra($_POST["suc_id"]);
+        $data = array();
+        foreach ($datos as $row) {
+            $data[] = $row;
+        }
+        echo json_encode($data);
+        break;
 }   
 ?>

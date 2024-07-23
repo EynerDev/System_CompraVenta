@@ -59,7 +59,7 @@
                                     <div class="card">
                                         <div class="card-header">
                                             <!-- Grids in modals -->
-                                            <button type="button" id="btn_nuevo" name="btn_nuevo" class="btn btn-primary btn-label waves-effect waves-light">
+                                            <button type="button" id="btn_nuevo" name="btn_nuevo" class="btn btn-info btn-label waves-effect waves-light">
                                                 <i class="ri-add-circle-fill label-icon align-middle fs-16 me-2"></i> Nuevo Registro
                                             </button>
                                             
@@ -67,6 +67,7 @@
                                             <table id="table_datos" name="table_datos" class="table table-bordered dt-responsive nowrap table-striped align-middle" style="width:100%">
                                                 <thead>
                                                     <tr>
+                                                        <th></th>
                                                         <th>Categoria</th>
                                                         <th>Nombre</th>
                                                         <th>Unidad Medida</th>
@@ -77,6 +78,8 @@
                                                         <th>Fecha de Creación</th>
                                                         <th></th>
                                                         <th></th>
+                                                        <th></th>
+                                                        
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -113,7 +116,8 @@
     ?>
 
     <?php
-    require_once("ModalProducto.php")
+    require_once("ModalProducto.php");
+    require_once("ModalProductoConsumo.php")
     ?>
 
     <?php

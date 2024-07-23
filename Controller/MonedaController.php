@@ -53,8 +53,8 @@ switch($_GET["op"]){
             $sub_array[] = $row["MON_NAME"]; // Nombre de la moneda
             $sub_array[] = $row["CREATED_AT"]; // Fecha de creación
             // Botones para editar y eliminar el registro
-            $sub_array[] = '<button type="button" onClick="editar('.$row["MON_ID"].')" id="'.$row["MON_ID"].'" class="btn btn-warning btn-label waves-effect waves-light"><i class="ri-edit-box-fill label-icon align-middle fs-16 me-2"></i> Editar</button>';
-            $sub_array[] = '<button type="button" onClick="eliminar('.$row["MON_ID"].')" id="'.$row["MON_ID"].'" class="btn btn-danger btn-label waves-effect waves-light"><i class="ri-delete-bin-5-line label-icon align-middle fs-16 me-2"></i> Eliminar</button>'; 
+            $sub_array[] = '<button type="button" onClick="editar('.$row["MON_ID"].')" id="'.$row["MON_ID"].'" class="btn btn-soft-warning btn-icon waves-effect waves-light layout-rightside-btn"><i class=" ri-edit-line label-icon "></i> </button>';
+            $sub_array[] = '<button type="button" onClick="eliminar('.$row["MON_ID"].')" id="'.$row["MON_ID"].'" class="btn btn-soft-danger btn-icon waves-effect waves-light layout-rightside-btn"><i class="ri-delete-bin-5-line label-icon "></i> </button>'; 
             $data[] = $sub_array;
         }
 

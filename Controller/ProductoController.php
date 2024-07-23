@@ -108,9 +108,11 @@ switch ($_GET["op"]) {
             $sub_array[] = $row["PROD_PVENTA"];
             $sub_array[] = $row["PROD_STOCK"];
             $sub_array[] = $row["CREATED_AT"];
+            
             // Botones para editar y eliminar el producto
-            $sub_array[] = '<button type="button" onClick="editar(' . $row["PROD_ID"] . ')" id="' . $row["PROD_ID"] . '" class="btn btn-warning btn-label waves-effect waves-light"><i class="ri-edit-box-fill label-icon align-middle fs-16 me-2"></i> Editar</button>';
-            $sub_array[] = '<button type="button" onClick="eliminar(' . $row["PROD_ID"] . ')" id="' . $row["PROD_ID"] . '" class="btn btn-danger btn-label waves-effect waves-light"><i class="ri-delete-bin-5-line label-icon align-middle fs-16 me-2"></i> Eliminar</button>';
+            $sub_array[] = '<button type="button" onClick="editar(' . $row["PROD_ID"] . ')" id="' . $row["PROD_ID"] . '" class="btn btn-soft-warning btn-icon waves-effect waves-light layout-rightside-btn"><i class=" ri-edit-line label-icon "></i></button>';
+            $sub_array[] = '<button type="button" onClick="eliminar(' . $row["PROD_ID"] . ')" id="' . $row["PROD_ID"] . '" class="btn btn-soft-danger btn-icon waves-effect waves-light layout-rightside-btn"><i class="ri-delete-bin-5-line label-icon "></i></button>';
+            $sub_array[] = '<button type="button" onClick="verDetalle(' . $row["PROD_ID"] . ')" id="' . $row["PROD_ID"] . '" class="btn btn-soft-info btn-icon waves-effect waves-light layout-rightside-btn"><i class="ri-eye-line label-icon"></i></button>';
             $data[] = $sub_array;
         }
 
@@ -180,6 +182,40 @@ switch ($_GET["op"]) {
             // Manejar el caso donde no se encuentran datos
             echo "<option selected>No se encontraron productos</option>";
         }
+        break;
+    case "consumo":
+        // Listar detalles de una compra específica
+        $datos = $producto->get_compra_venta_entrada_producto($_POST["prod_id"]);
+        $data = array();
+        if (is_array($datos) == TRUE and count($datos) > 0) {
+            foreach ($datos as $row) {
+                $sub_array = array();
+            
+                    if($row["REGISTRO"] == 'Compra'){
+                        $sub_array[] = '<div class="flex-shrink-0 avatar-xs acitivity-avatar"><div class="avatar-title bg-soft-success text-success rounded ">
+                        <i class="ri-shopping-cart-2-line"></i>
+                        </div></div>';        
+                    }else{
+                        $sub_array[] = '<div class="flex-shrink-0 avatar-xs acitivity-avatar"><div class="avatar-title bg-soft-secondary text-secondary rounded ">
+                        <i class=" ri-line-chart-line"></i>
+                        </div></div>';    
+                    }
+        
+                $sub_array[] = $row["REGISTRO"];
+                $sub_array[] = $row["DOC_NAME"];
+                $sub_array[] = $row["FECHA"];
+                $sub_array[] = $row["CANT"];
+                $data[] = $sub_array;
+            }
+        }
+        // Preparar y enviar respuesta JSON
+        $results = array(
+            "sEcho" => 1,
+            "iTotalRecords" => count($data),
+            "iTotalDisplayRecords" => count($data),
+            "aaData" => $data
+        );
+        echo json_encode($results);
         break;
 }
 ?>

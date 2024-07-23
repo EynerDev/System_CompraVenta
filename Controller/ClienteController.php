@@ -63,8 +63,8 @@ switch ($_GET["op"]) {
             $sub_array[] = $row["CLI_NUMBER"]; // Número de contacto del cliente
             $sub_array[] = $row["CLI_EMAIL"]; // Correo electrónico del cliente
             $sub_array[] = $row["CREATED_AT"]; // Fecha de creación
-            $sub_array[] = '<button type="button" onClick="editar(' . $row["CLI_ID"] . ')" id="' . $row["CLI_ID"] . '" class="btn btn-warning btn-label waves-effect waves-light"><i class="ri-edit-box-fill label-icon align-middle fs-16 me-2"></i> Editar</button>'; // Botón de editar
-            $sub_array[] = '<button type="button" onClick="eliminar(' . $row["CLI_ID"] . ')" id="' . $row["CLI_ID"] . '" class="btn btn-danger btn-label waves-effect waves-light"><i class="ri-delete-bin-5-line label-icon align-middle fs-16 me-2"></i> Eliminar</button>'; // Botón de eliminar
+            $sub_array[] = '<button type="button" onClick="editar(' . $row["CLI_ID"] . ')" id="' . $row["CLI_ID"] . '" class="btn btn-soft-warning btn-icon waves-effect waves-light layout-rightside-btn"><i class=" ri-edit-line label-icon align-middle"></i></button>'; // Botón de editar
+            $sub_array[] = '<button type="button" onClick="eliminar(' . $row["CLI_ID"] . ')" id="' . $row["CLI_ID"] . '" class="btn btn-soft-danger btn-icon waves-effect waves-light layout-rightside-btn"><i class="ri-delete-bin-5-line label-icon"></i></button>'; // Botón de eliminar
             $data[] = $sub_array; // Añadir el subarray al array principal
         }
 

@@ -59,7 +59,7 @@
                                         <div class="card">
                                             <div class="card-header">
                                                 <!-- Grids in modals -->
-                                                <button type="button" id="btn_nuevo" name="btn_nuevo" class="btn btn-primary btn-label waves-effect waves-light">
+                                                <button type="button" id="btn_nuevo" name="btn_nuevo" class="btn btn-info btn-label waves-effect waves-light">
                                                     <i class="ri-add-circle-fill label-icon align-middle fs-16 me-2"></i> Nuevo Registro
                                                 </button>
                                                 

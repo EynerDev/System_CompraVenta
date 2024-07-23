@@ -115,8 +115,8 @@
                                                         <a href="../MntProducto/" class="text-decoration-underline">Ver Productos</a>
                                                     </div>
                                                     <div class="avatar-sm flex-shrink-0">
-                                                        <span class="avatar-title bg-soft-success rounded fs-3">
-                                                            <i class="bx bx-dollar-circle text-success"></i>
+                                                        <span class="avatar-title  bg-soft-primary rounded fs-3">
+                                                            <i class="bx bx-shopping-bag text-success"></i>
                                                         </span>
                                                     </div>
                                                 </div>
@@ -138,8 +138,8 @@
                                                         <a href="../MntCategoria/" class="text-decoration-underline">Ver Categorias</a>
                                                     </div>
                                                     <div class="avatar-sm flex-shrink-0">
-                                                        <span class="avatar-title bg-soft-info rounded fs-3">
-                                                            <i class="bx bx-shopping-bag text-info"></i>
+                                                        <span class="avatar-title  bg-soft-primary rounded fs-3">
+                                                            <i class="bx bx-category text-info"></i>
                                                         </span>
                                                     </div>
                                                 </div>
@@ -162,7 +162,7 @@
                                                         <a href="../MntCliente/" class="text-decoration-underline">Ver Clientes</a>
                                                     </div>
                                                     <div class="avatar-sm flex-shrink-0">
-                                                        <span class="avatar-title bg-soft-warning rounded fs-3">
+                                                        <span class="avatar-title  bg-soft-primary rounded fs-3">
                                                             <i class="bx bx-user-circle text-warning"></i>
                                                         </span>
                                                     </div>
@@ -186,7 +186,7 @@
                                                     </div>
                                                     <div class="avatar-sm flex-shrink-0">
                                                         <span class="avatar-title bg-soft-primary rounded fs-3">
-                                                            <i class="bx bx-wallet text-primary"></i>
+                                                            <i class="bx bx-package text-danger"></i>
                                                         </span>
                                                     </div>
                                                 </div>

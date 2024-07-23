@@ -10,7 +10,7 @@ $datos = $menu->get_menu_role_id($_SESSION["USER_ROLE_ID"]);
             <!-- LOGO -->
             <div class="navbar-brand-box">
                 <!-- Dark Logo-->
-                <a href="index.html" class="logo logo-dark">
+                <a href="" class="logo logo-dark">
                     <span class="logo-sm">
                         <img src="../../assets/images/logo-sm.png" alt="" height="22">
                     </span>
@@ -19,7 +19,7 @@ $datos = $menu->get_menu_role_id($_SESSION["USER_ROLE_ID"]);
                     </span>
                 </a>
                 <!-- Light Logo-->
-                <a href="index.html" class="logo logo-light">
+                <a href="" class="logo logo-light">
                     <span class="logo-sm">
                         <img src="../../assets/images/logo-sm.png" alt="" height="22">
                     </span>
