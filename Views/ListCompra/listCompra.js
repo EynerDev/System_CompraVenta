@@ -141,3 +141,34 @@ function calculo_detalle(compra_id){
             console.error("Error en la solicitud:", error);
         });
 }
+function eliminar(compra_id){
+    swal.fire({
+        title: "Eliminar",
+        text: "¿Estás seguro de eliminar este registro?",
+        icon: "error",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Sí, eliminar",
+        cancelButtonText: "Cancelar"
+
+    }).then((result => {
+        if (result.value){
+            $.post("../../Controller/CompraController.php?op=eliminar_compra",{compra_id:compra_id}, function(data){
+            })
+           
+            $("#table_datos").DataTable().ajax.reload();
+
+            swal.fire({
+                title : "Compra y Venta",
+                text : "Registro Eliminado",
+                icon : "success",
+                confirmButtonClass : "btn-success"
+
+
+            })
+        }
+
+    }));
+    
+}

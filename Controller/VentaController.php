@@ -315,5 +315,8 @@ case "detalle":
         }
         echo json_encode($data);
         break;
+    case "eliminar_venta":
+        $venta->delete_venta($_POST["venta_id"]);
+        break;
 }   
 ?>

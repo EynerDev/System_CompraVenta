@@ -135,6 +135,14 @@
             return $sql_query->fetchAll(PDO::FETCH_ASSOC);     
 
         }
+        public function delete_venta($venta_id){
+            $conectar = parent::conexion();
+            $sql = "SP_D_VENTA_02 ?";
+            $sql_query=$conectar->prepare($sql);
+            $sql_query->bindValue(1, $venta_id);
+            $sql_query->execute();
+        
+        }
 }
 
 ?>

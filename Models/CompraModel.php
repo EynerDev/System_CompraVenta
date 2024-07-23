@@ -145,6 +145,14 @@
             return $sql_query->fetchAll(PDO::FETCH_ASSOC); 
         
         }
+        public function delete_compra($compra_id){
+            $conectar = parent::conexion();
+            $sql = "SP_D_COMPRA_02 ?";
+            $sql_query=$conectar->prepare($sql);
+            $sql_query->bindValue(1, $compra_id);
+            $sql_query->execute();
+        
+        }
         
 }
 

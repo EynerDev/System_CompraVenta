@@ -361,6 +361,10 @@ switch ($_GET["op"]) {
         }
         echo json_encode($data);
         break;
+    case "eliminar_compra":
+        $compra->delete_compra($_POST["compra_id"]);
+        break;
+
     
 }
 ?>

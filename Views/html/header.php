@@ -62,7 +62,7 @@
                                         class="mdi mdi-account-circle text-muted fs-16 align-middle me-1"></i> <span
                                         class="align-middle">Profile</span></a>
 
-                                <a class="dropdown-item" href="pages-faqs.html"><i
+                                <a class="dropdown-item" href="../help/"><i
                                         class="mdi mdi-lifebuoy text-muted fs-16 align-middle me-1"></i> <span
                                         class="align-middle">Help</span></a>
 
