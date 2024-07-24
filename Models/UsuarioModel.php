@@ -1,6 +1,6 @@
 <?php
 
-    class Usuario extends conectar{
+    class Usuario extends Conectar{
         // TODO: Listar registros por sucursal id
         public function get_usuario_sucursal_id($suc_id){
             $conectar = parent::conexion();
@@ -123,7 +123,7 @@
                     $_SESSION["COM_ID"] = $resultado["COM_ID"];
                     $_SESSION["EMP_ID"] = $resultado["EMP_ID"];
                     
-                    header("Location:".conectar::baseUrl()."Views/home/");
+                    header("Location:".Conectar::baseUrl()."Views/home/");
                     exit();
                 } else {
                     // Mostrar mensaje de error o redirigir con un mensaje de error

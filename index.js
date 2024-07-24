@@ -2,8 +2,7 @@ $(document).ready(function(){
 
     var com_id = getUrlParameter('c');
 
-    $('#emp_id').select2();
-    $('#suc_id').select2();
+    $('#emp_id, #suc_id').select2();
 
     // Realiza una solicitud AJAX POST a EmpresaController.php cuando se carga la página o ocurre una cierta acción
     $.post("Controller/EmpresaController.php?op=combo", { com_id: com_id })

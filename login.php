@@ -130,11 +130,6 @@ $usuario->Login();
                                                     </div>
                                                 </div>
 
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="auth-remember-check">
-                                                    <label class="form-check-label" for="auth-remember-check">Recuerdame</label>
-                                                </div>
-
                                                 <div class="mt-4">
                                                     <input type="hidden" name="enviar" value="si" class="form_control">
                                                     <button class="btn btn-success w-100"  type="submit">Acceder</button>
