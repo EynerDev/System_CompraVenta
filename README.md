@@ -1,6 +1,6 @@
 # Sistema de Compra y Venta PHP,SQL SERVER y JS
 
-_Sistema desarrollado por anderson bastidas a modo de practica y material educativo_
+_Sistema desarrollado por eyner acosta a modo de practica y material educativo
 
 ## Comenzando 🚀
 
