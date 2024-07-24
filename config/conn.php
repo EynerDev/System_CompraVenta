@@ -8,25 +8,18 @@
     class Conectar {
         protected function conexion() {
             // Variables de entorno para la conexión
-            $host = $_ENV['DB_HOST'];
-            $instance = $_ENV['DB_INSTANCE'];  // Nombre de la instancia
+            $host = $_ENV['DB_HOST']; 
             $db = $_ENV['DB'];  // Nombre de tu base de datos
             $user = $_ENV['DB_USER'];  // Usuario de SQL Server
             $pass = $_ENV['DB_PASS'];  // Contraseña de SQL Server
-            $charset = $_ENV['DB_CHARSET'];
-
-            // Cadena de conexión PDO para SQL Server
-            $dsn = "sqlsrv:Server=$host\\$instance;Database=$db";
-            $options = [
-                PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
-                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-                PDO::ATTR_EMULATE_PREPARES   => false,
-            ];
 
             try {
                 // Intenta conectar a la base de datos
-                $pdo = new PDO($dsn, $user, $pass, $options);
-                // echo "Conexión exitosa."; // Esto debería estar en otra parte, no en la conexión misma
+                //Cadena de conexion a azure DB
+                $pdo = new PDO("sqlsrv:server = $host; Database = $db", $user, $pass);
+
+                // $pdo = new PDO("sqlsrv:Server=$host;Database=$db", $user, $pass);
+                 echo "Conexión exitosa.";// Esto debería estar en otra parte, no en la conexión misma
                 return $pdo;
             } catch (PDOException $e) {
                 // Maneja los errores de conexión
@@ -36,7 +29,11 @@
         }
 
         public static function baseUrl(){
-            return "http://localhost/System_CompraVenta/";
+            //Ruta entorno de desarrollo
+            // return "http://localhost/System_CompraVenta/";
+
+            //Ruta entorno de produccion(AZURE)
+            return" http://compraventa-eynerdev.azurewebsites.net/";
         }
     }
 ?>
