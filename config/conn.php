@@ -33,7 +33,7 @@
             // return "http://localhost/System_CompraVenta/";
 
             //Ruta entorno de produccion(AZURE)
-            return "http://compraventa-eynerdev.azurewebsites.net/";
+            return "https://compraventa-eynerdev.azurewebsites.net/";
         }
     }
 ?>
