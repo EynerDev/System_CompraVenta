@@ -1,176 +1,200 @@
-<?php
-require_once("Config/conn.php");
-if(isset($_POST["enviar"]) and $_POST["enviar"]=="si"){
-require_once("Models/UsuarioModel.php");
-$usuario = new Usuario;
-$usuario->Login();
-}
-
-?>
-
 <!doctype html>
-<html lang="en" data-layout="vertical" data-topbar="light" data-sidebar="dark" data-sidebar-size="lg" data-sidebar-image="none">
+<html lang="es" data-layout="vertical" data-topbar="light" data-sidebar="dark" data-sidebar-size="lg" data-sidebar-image="none">
 
 <head>
 
     <meta charset="utf-8" />
-    <title>Login EynerDev System</title>
+    <title>Compra y Venta</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
     <meta content="Themesbrand" name="author" />
-    <!-- App favicon -->
     <link rel="shortcut icon" href="assets/images/favicon.ico">
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
-    <!-- Layout config Js -->
+    <link href="assets/libs/swiper/swiper-bundle.min.css" rel="stylesheet" type="text/css" />
     <script src="assets/js/layout.js"></script>
-    <!-- Bootstrap Css -->
     <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <!-- Icons Css -->
     <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
-    <!-- App Css-->
     <link href="assets/css/app.min.css" rel="stylesheet" type="text/css" />
-    <!-- custom Css-->
     <link href="assets/css/custom.min.css" rel="stylesheet" type="text/css" />
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-
 </head>
 
 <body>
 
-    <!-- auth-page wrapper -->
-    <div class="auth-page-wrapper auth-bg-cover py-5 d-flex justify-content-center align-items-center min-vh-100">
-        <div class="bg-overlay"></div>
-        <!-- auth-page content -->
-        <div class="auth-page-content overflow-hidden pt-lg-5">
+    <div class="layout-wrapper landing">
+        <nav class="navbar navbar-expand-lg navbar-landing fixed-top" id="navbar">
             <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="card overflow-hidden">
-                            <div class="row g-0">
-                                <div class="col-lg-6">
-                                    <div class="p-lg-5 p-4 auth-one-bg h-100">
-                                        <div class="bg-overlay"></div>
-                                        <div class="position-relative h-100 d-flex flex-column">
-                                            <div class="mb-4">
-                                                <a href="index.html" class="d-block">
-                                                </a>
-                                            </div>
-                                            <div class="mt-auto">
-                                                <div class="mb-3">
-                                                    <i class="ri-double-quotes-l display-4 text-success"></i>
-                                                </div>
+                <a class="navbar-brand" href="index.html">
+                    <img src="assets/images/logo-dark.png" class="card-logo card-logo-dark" alt="logo dark" height="17">
+                    <img src="assets/images/logo-light.png" class="card-logo card-logo-light" alt="logo light" height="17">
+                </a>
+                <button class="navbar-toggler py-0 fs-20 text-body" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="mdi mdi-menu"></i>
+                </button>
 
-                                                <div id="qoutescarouselIndicators" class="carousel slide" data-bs-ride="carousel">
-                                                    <div class="carousel-indicators">
-                                                        <button type="button" data-bs-target="#qoutescarouselIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                                                        <button type="button" data-bs-target="#qoutescarouselIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                                                        <button type="button" data-bs-target="#qoutescarouselIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                                                    </div>
-                                                    <div class="carousel-inner text-center text-white-50 pb-5">
-                                                        <div class="carousel-item active">
-                                                            <p class="fs-15 fst-italic">" Great! Clean code, clean design, easy for customization. Thanks very much! "</p>
-                                                        </div>
-                                                        <div class="carousel-item">
-                                                            <p class="fs-15 fst-italic">" The theme is really great with an amazing customer support."</p>
-                                                        </div>
-                                                        <div class="carousel-item">
-                                                            <p class="fs-15 fst-italic">" Great! Clean code, clean design, easy for customization. Thanks very much! "</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!-- end carousel -->
-                                            </div>
+            </div>
+        </nav>
+
+        <section class="section bg-light" id="plans">
+
+            <div class="bg-overlay bg-overlay-pattern"></div>
+
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-8">
+                        <div class="text-center mb-5">
+                            <h3 class="mb-3 fw-semibold">Elegir Compañia</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row gy-4">
+
+                <div class="col-lg-6">
+                        <div class="card plan-box mb-0">
+                            <div class="card-body p-4 m-2">
+                                <div class="d-flex align-items-center">
+                                    <div class="flex-grow-1">
+                                        <h5 class="mb-1 fw-semibold">Compañia 1</h5>
+                                        <p class="text-muted mb-0">Compañia 1</p>
+                                    </div>
+                                    <div class="avatar-sm">
+                                        <div class="avatar-title bg-light rounded-circle text-primary">
+                                            <i class="ri-book-mark-line fs-20"></i>
                                         </div>
                                     </div>
                                 </div>
-                                <!-- end col -->
 
-                                <div class="col-lg-6">
-                                    <div class="p-lg-5 p-4">
-                                        <div>
-                                            <h5 class="text-primary">Bienvenido</h5>
-                                            <p class="text-muted">Acceder a EynerDev.</p>
-                                        </div>
+                                <div class="py-4 text-center">
 
-                                        <div class="mt-4">
-                                            <form action="" method="post" id="login_form">
-
-                                                <div class="mb-3">
-                                                    <h6 class="fw-semibold">Empresa:</h6>
-                                                    <select class="js-example-basic-single" id="emp_id" name="emp_id">
-                                                    <option selected>Seleccionar Empresa</option>
-                      
-                                                    </select>
-                                                </div>
-                                                
-                                                <div class="mb-3">
-                                                    <h6 class="fw-semibold">Sucursal:</h6>
-                                                    <select class="js-example-basic-single" id="suc_id" name="suc_id">
-                                                    <option selected>Seleccionar Sucursal</option>
-                                                        
-                                                    </select>
-                                                </div>
-                                            
-
-                                                <div class="mb-3">
-                                                    <label for="" class="form-label">Correo:</label>
-                                                    <input type="text" class="form-control" name="email" id="email" placeholder="Ingrese su Correo">
-                                                </div>
-
-                                                <div class="mb-3">
-                                                    <div class="float-end">
-                                                        <a href="auth-pass-reset-cover.html" class="text-muted">Olvide Mi Contraseña?</a>
-                                                    </div>
-                                                    <label class="form-label" for="contraseña">Contraseña:</label>
-                                                    <div class="position-relative auth-pass-inputgroup mb-3">
-                                                        <input type="password" class="form-control pe-5" placeholder="Ingrese su Contraseña" name="password" id="password">
-                                                        <button class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted" type="button" id="password-addon"><i class="ri-eye-fill align-middle"></i></button>
-                                                    </div>
-                                                </div>
-
-                                                <div class="mt-4">
-                                                    <input type="hidden" name="enviar" value="si" class="form_control">
-                                                    <button class="btn btn-success w-100"  type="submit">Acceder</button>
-                                                </div>
-
-                                            </div>
                                 </div>
-                                <!-- end col -->
+
+                                <div>
+                                    <ul class="list-unstyled text-muted vstack gap-3 ff-secondary">
+                                        <li>
+                                            <div class="d-flex">
+                                                <div class="flex-shrink-0 text-success me-1">
+                                                    <i class="ri-checkbox-circle-fill fs-15 align-middle"></i>
+                                                </div>
+                                                <div class="flex-grow-1">
+                                                    Caracteristica 0
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    <div class="mt-4">
+                                        <!-- TODO:Seleccionar compañia enviar valor a login -->
+                                        <a href="login.php?c=1" class="btn btn-soft-success w-100">Ir</a>
+                                    </div>
+                                </div>
                             </div>
-                            <!-- end row -->
                         </div>
-                        <!-- end card -->
                     </div>
-                    <!-- end col -->
+
+                    <div class="col-lg-6">
+                        <div class="card plan-box mb-0">
+                            <div class="card-body p-4 m-2">
+                                <div class="d-flex align-items-center">
+                                    <div class="flex-grow-1">
+                                        <h5 class="mb-1 fw-semibold">Compañia 2</h5>
+                                        <p class="text-muted mb-0">Compañia 2</p>
+                                    </div>
+                                    <div class="avatar-sm">
+                                        <div class="avatar-title bg-light rounded-circle text-primary">
+                                            <i class="ri-book-mark-line fs-20"></i>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="py-4 text-center">
+
+                                </div>
+
+                                <div>
+                                    <ul class="list-unstyled text-muted vstack gap-3 ff-secondary">
+                                        <li>
+                                            <div class="d-flex">
+                                                <div class="flex-shrink-0 text-success me-1">
+                                                    <i class="ri-checkbox-circle-fill fs-15 align-middle"></i>
+                                                </div>
+                                                <div class="flex-grow-1">
+                                                    Caracteristica 0
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    <div class="mt-4">
+                                        <!-- TODO:Seleccionar compañia enviar valor a login -->
+                                        <a href="login.php?c=2" class="btn btn-soft-success w-100">Ir</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                 </div>
-                <!-- end row -->
             </div>
-            <!-- end container -->
-        </div>
-        <!-- end auth page content -->
 
-        <!-- footer -->
-        <footer class="footer">
+        </section>
+
+        <!-- <footer class="custom-footer bg-dark py-5 position-relative">
             <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="text-center">
-                            <p class="mb-0">&copy;
-                                <script>document.write(new Date().getFullYear())</script> EynerDev. Crafted with <i class="mdi mdi-heart text-danger"></i> by Eyner Acosta
+
+                <div class="row text-center text-sm-start align-items-center mt-1">
+                    <div class="col-sm-6">
+
+                        <div>
+                            <p class="copy-rights mb-0">
+                                <script> document.write(new Date().getFullYear()) </script> © Velzon - Themesbrand
                             </p>
                         </div>
                     </div>
+                    <div class="col-sm-6">
+                        <div class="text-sm-end mt-3 mt-sm-0">
+                            <ul class="list-inline mb-0 footer-social-link">
+                                <li class="list-inline-item">
+                                    <a href="javascript: void(0);" class="avatar-xs d-block">
+                                        <div class="avatar-title rounded-circle">
+                                            <i class="ri-facebook-fill"></i>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a href="javascript: void(0);" class="avatar-xs d-block">
+                                        <div class="avatar-title rounded-circle">
+                                            <i class="ri-github-fill"></i>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a href="javascript: void(0);" class="avatar-xs d-block">
+                                        <div class="avatar-title rounded-circle">
+                                            <i class="ri-linkedin-fill"></i>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a href="javascript: void(0);" class="avatar-xs d-block">
+                                        <div class="avatar-title rounded-circle">
+                                            <i class="ri-google-fill"></i>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a href="javascript: void(0);" class="avatar-xs d-block">
+                                        <div class="avatar-title rounded-circle">
+                                            <i class="ri-dribbble-line"></i>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </footer>
-        <!-- end Footer -->
-    </div>
-    <!-- end auth-page-wrapper -->
+        </footer> -->
 
-    <!-- JAVASCRIPT -->
+    </div>
+
     <script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="assets/libs/simplebar/simplebar.min.js"></script>
     <script src="assets/libs/node-waves/waves.min.js"></script>
@@ -178,14 +202,7 @@ $usuario->Login();
     <script src="assets/js/pages/plugins/lord-icon-2.1.0.js"></script>
     <script src="assets/js/plugins.js"></script>
 
-    <!--jquery cdn-->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <!--select2 cdn-->
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-
-    <!-- password-addon init -->
-    <script src="assets/js/pages/password-addon.init.js"></script>
-    <script type="text/javascript" src="index.js"></script>
+    <script src="assets/libs/swiper/swiper-bundle.min.js"></script>
 </body>
 
 </html>
